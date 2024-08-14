@@ -1,6 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
+const { tokendetails } = require("./controllers/tokens.controllers.js");
+const {
+  checkContributedBTS,
+  getUserBTSData,
+} = require("./controllers/user.controller.js");
 
 const app = express();
 
@@ -10,12 +15,13 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 const URI = `/webhook/${BOT_TOKEN}`;
 
-
-const WEBHOOK_URL =
-  "https://pinggy" +
-  URI;
+const WEBHOOK_URL = "https://pinggy" + URI;
 
 app.use(bodyParser.json());
+
+tokendetails();
+checkContributedBTS();
+getUserBTSData();
 
 const init = async () => {
   const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`);
