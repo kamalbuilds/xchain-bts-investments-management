@@ -2,9 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 
+const { Telegraf, Scenes, session } = require("telegraf");
+const { createCallBackBtn } = require("./utils");
+const { importWalletScene, importWalletStep } = require("./scenes");
+
+
 require("dotenv").config();
 
-const TelegramBot = require('node-telegram-bot-api');
 
 const { tokendetails } = require("./controllers/tokens.controllers.js");
 
@@ -19,7 +23,44 @@ const port = process.env.PORT || 3001;
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
-const bot = new TelegramBot(BOT_TOKEN, { polling: true });
+const bot = new Telegraf(BOT_TOKEN);
+
+const stage = new Scenes.Stage([importWalletStep]);
+
+bot.use(session());
+
+bot.use(stage.middleware());
+
+bot.command("start", (ctx) => {
+  const message = `Welcome to the XChain-BTS-Investment Bot!`;
+
+  const importWalletButton = createCallBackBtn(
+    "Import Wallet",
+    "import-wallet"
+  );
+
+  const showWalletButton = createCallBackBtn("Show Wallet", "show-wallet");
+
+  ctx.reply(message, {
+    reply_markup: {
+      inline_keyboard: [[importWalletButton], [showWalletButton]],
+    },
+  });
+});
+
+bot.action("import-wallet", (ctx) => {
+  ctx.scene.enter(importWalletScene);
+});
+
+bot.action("show-wallet", (ctx) => {
+  if (ctx.session.wallet) {
+    ctx.reply(`Your wallet address is ${ctx.session.wallet.address}`);
+  } else {
+    ctx.reply("You have not imported any wallet yet.");
+  }
+});
+
+bot.launch();
 
 const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
