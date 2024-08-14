@@ -33,7 +33,7 @@
     "pino-pretty": "^11.2.2",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
-    "react-custom-checkbox": "^3.1.5",
+    "react-custom-checkbox": "^3.2.0",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.1",
     "react-select": "^5.8.0",

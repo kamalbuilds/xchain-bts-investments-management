@@ -30,6 +30,13 @@ export function SiteHeader() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
 
+          <Link href="/" className="text-primary text-[20px] font-[500]">
+              Explore Investment Strategies
+            </Link>
+            <Link href="/mybots" className="text-primary text-[20px] font-[500]">
+              My Investment Bots
+            </Link>
+
             <ConnectButton client={client} wallets={wallets} chains={[sepolia, polygonAmoy]} />
 
             <ThemeToggle />
