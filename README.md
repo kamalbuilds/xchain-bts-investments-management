@@ -1,4 +1,4 @@
-# xchain-basket-funds-management
+# Crosschain-Basket-Investments-management
 
 We provide Decentralized Fund Management Services: Offer fund management services to users who want to invest but lack the time or expertise to manage their own portfolios.
 

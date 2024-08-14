@@ -76,7 +76,7 @@ const InvestmentPanel = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-[14px] font-[500] text-grey">
-                  Day's Profit
+                  Day&apos;s Profit
                 </span>
                 <span className="text-[20px] text-primary font-[500]">601</span>
               </div>
