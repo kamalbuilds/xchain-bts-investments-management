@@ -13,7 +13,9 @@ export default function MyBots() {
 
   const searchparams = useParams();
 
-  const { id, first_name, last_name, username, photo_url, auth_date, hash } = searchparams.query;
+  const name = searchparams.query;
+
+  const { id, first_name, last_name, username, photo_url, auth_date, hash } = name;
 
   const isLoggedIn = Boolean(id);
 
