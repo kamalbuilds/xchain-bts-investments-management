@@ -1,7 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
+
+require("dotenv").config();
+
 const { tokendetails } = require("./controllers/tokens.controllers.js");
+
 const {
   checkContributedBTS,
   getUserBTSData,
@@ -12,7 +16,9 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+const TELEGRAM_API = `https://api.telegram.org/bot/${BOT_TOKEN}`;
+
 const URI = `/webhook/${BOT_TOKEN}`;
 
 const WEBHOOK_URL = "https://pinggy" + URI;

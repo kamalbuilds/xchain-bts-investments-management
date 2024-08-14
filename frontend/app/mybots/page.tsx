@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import dynamic from "next/dynamic";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -10,9 +10,10 @@ import InvestmentPanel from "../../components/Layout/InvestmentPanel";
 import sendTelegramMessage from "../../actions/welcome";
 
 export default function MyBots() {
-  const router = useRouter();
-  const { id, first_name, last_name, username, photo_url, auth_date, hash } =
-    router.query;
+
+  const searchparams = useParams();
+
+  const { id, first_name, last_name, username, photo_url, auth_date, hash } = searchparams.query;
 
   const isLoggedIn = Boolean(id);
 
@@ -35,9 +36,9 @@ export default function MyBots() {
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${selectedCurrency}/ohlc?vs_currency=usd&days=14`
       );
-      const formattedData = response.data.map((ohlc) => ({
-        x: new Date(ohlc[0]),
-        y: [ohlc[1], ohlc[2], ohlc[3], ohlc[4]],
+      const formattedData = response.data.map((x : any) => ({
+        x: new Date(x[0]),
+        y: [x[1], x[2], x[3], x[4]],
       }));
       setSeries([{ data: formattedData }]);
     };
