@@ -13,7 +13,7 @@ import { sepolia, polygonAmoy } from 'thirdweb/chains';
 
 export function SiteHeader() {
 
-  const client = createThirdwebClient({ clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID as string });
+  const client = createThirdwebClient({ clientId: '427a3ada4b06147ce28a0d8de71e4688' });
 
   const wallets = [
     inAppWallet(),
@@ -30,7 +30,7 @@ export function SiteHeader() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
 
-          <Link href="/" className="text-primary text-[20px] font-[500]">
+            <Link href="/" className="text-primary text-[20px] font-[500]">
               Explore Investment Strategies
             </Link>
             <Link href="/mybots" className="text-primary text-[20px] font-[500]">

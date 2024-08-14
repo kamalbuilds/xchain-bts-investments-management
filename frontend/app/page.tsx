@@ -1,59 +1,80 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
-import BotCard from "../components/custom-components/BotCard";
-import Link from "next/link";
-import sendTelegramMessage from "../actions/welcome";
+import React, { useEffect, useState } from "react"
+import Link from "next/link"
+
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+
+import sendTelegramMessage from "../actions/welcome"
+import { InvestorCard } from "../components/investors/InvestorCard"
 
 export default function Home() {
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState<string>("")
 
-  const handleCardSelect = (cardTitle) => {
-    setSelectedCard(cardTitle);
-  };
+  const handleCardSelect = (cardTitle: string) => {
+    setSelectedCard(cardTitle)
+  }
 
   const welcome = () => {
-    const welcomeMessage = "Welcome to AlvaraXChainInvestment !";
+    const welcomeMessage = "Welcome to AlvaraXChainInvestment !"
     sendTelegramMessage("kamalthedev", welcomeMessage)
-      .then((response) => console.log("Message sent:", response))
-      .catch((error) => console.error("Error:", error));
-  };
+      .then((response: any) => console.log("Message sent:", response))
+      .catch((error: any) => console.error("Error:", error))
+  }
 
   return (
-      <div className="flex flex-col">
+    <div className="flex flex-col gap-8 px-20 py-8">
+      <div>
         <h5 className="text-[24px] font-[700]">EXPLORE</h5>
-        <div className="flex flex-row mt-[32px] space-x-[32px] border-b border-[#DCD2C7] pb-[20px]">
-          {["CONSERVATIVE", "MODERATE", "DEGEN"].map((title, tagline, index) => (
-            <BotCard
-              key={index}
-              title={title}
-              tagline={title}
-              imageSrc={`/images/${title.toLowerCase()}-investor.png`}
-              volume="1,690,850"
-              profit="$2011.08"
-              selected={selectedCard === title}
-              onClick={() => handleCardSelect(title)}
-            />
-          ))}
+        <p className="text-[12px] font-[700] text-[#C3C3C3]">
+          Choose your investor type
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-row justify-center gap-12 border-[#DCD2C7]">
+          {["CONSERVATIVE", "MODERATE", "DEGEN"].map(
+            (title, tagline, index) => (
+              <InvestorCard
+                selected={selectedCard === title}
+                title={title}
+                volume="1,690,850"
+                profit="$2011.08"
+                handleCardSelect={handleCardSelect}
+              />
+            )
+          )}
         </div>
-        {selectedCard && (
-          <div className="flex flex-row mt-[20px] space-x-[32px]  pb-[20px]">
-            <div className="flex flex-col h-[238px] w-[393px] py-[15px] border border-primary rounded-[8px] p-[21px] cursor-pointer">
+
+        <Separator />
+      </div>
+
+      {selectedCard && (
+        <div>
+          <div>
+            <h5 className="text-[24px] font-[700]">Create</h5>
+            <p className="text-[12px] font-[700] text-[#C3C3C3]">
+              Choose the bot type
+            </p>
+          </div>
+          <div className="mt-[20px] flex flex-row space-x-[32px]  pb-[20px]">
+            <div className="border-primary flex h-[238px] w-[393px] cursor-pointer flex-col rounded-[8px] border p-[21px] py-[15px]">
               <div className="flex flex-row gap-[10px]">
                 <span className="text-[20px] font-[700]">USDT, LIDO, BNB</span>
                 <span className="text-[20px] font-[700] text-[#D9D9D9]">
                   +4
                 </span>
               </div>
-              <p className="text-[#C3C3C3] text-[12px] font-[700]">
+              <p className="text-[12px] font-[700] text-[#C3C3C3]">
                 The newest tokens in the market
               </p>
-              <div className="flex flex-row mt-[26px] gap-[25px]">
-                <div className="flex flex-col w-[66px] ">
-                  <span className="h-[14px] text-[12px] text-[#C3C3C3] font-[700] ">
+              <div className="mt-[26px] flex flex-row gap-[25px]">
+                <div className="flex w-[66px] flex-col ">
+                  <span className="h-[14px] text-[12px] font-[700] text-[#C3C3C3] ">
                     1 MONTH
                   </span>
-                  <span className="flex flex-row mt-[6px] items-center text-[24px] h-[25px] font-[700]">
+                  <span className="mt-[6px] flex h-[25px] flex-row items-center text-[24px] font-[700]">
                     17%
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -70,15 +91,15 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                  <span className="text-[16px] h-[21px] font-[700] text-[#F24E1E]">
+                  <span className="h-[21px] text-[16px] font-[700] text-[#F24E1E]">
                     5/5
                   </span>
                 </div>
-                <div className="flex flex-col w-[66px] ">
-                  <span className="h-[14px] text-[12px] text-[#C3C3C3] font-[700] ">
+                <div className="flex w-[66px] flex-col ">
+                  <span className="h-[14px] text-[12px] font-[700] text-[#C3C3C3] ">
                     3 MONTH
                   </span>
-                  <span className="flex flex-row mt-[6px] items-center text-[24px] h-[25px] font-[700]">
+                  <span className="mt-[6px] flex h-[25px] flex-row items-center text-[24px] font-[700]">
                     30%
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -95,15 +116,15 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                  <span className="text-[16px] h-[21px] font-[700] text-[#0FA958]">
+                  <span className="h-[21px] text-[16px] font-[700] text-[#0FA958]">
                     3/5
                   </span>
                 </div>
-                <div className="flex flex-col w-[66px] ">
-                  <span className="h-[14px] text-[12px] text-[#C3C3C3] font-[700] ">
+                <div className="flex w-[66px] flex-col ">
+                  <span className="h-[14px] text-[12px] font-[700] text-[#C3C3C3] ">
                     6 MONTH
                   </span>
-                  <span className="flex flex-row mt-[6px] items-center text-[24px] h-[25px] font-[700]">
+                  <span className="mt-[6px] flex h-[25px] flex-row items-center text-[24px] font-[700]">
                     42%
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -120,36 +141,33 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                  <span className="text-[16px] h-[21px] font-[700] text-[#0FA958]">
+                  <span className="h-[21px] text-[16px] font-[700] text-[#0FA958]">
                     1/5
                   </span>
                 </div>
               </div>
               <div className="flex ">
-                <button
-                  onClick={welcome}
-                  className="mt-[26px] w-full bg-primary font-[700] text-white rounded-[5px] h-[40px]"
-                >
+                <Button onClick={welcome} className="mt-[26px] w-full">
                   Create
-                </button>
+                </Button>
               </div>
             </div>
-            <div className="flex flex-col h-[238px] w-[393px] py-[15px] border border-primary rounded-[8px] p-[21px] cursor-pointer">
+            <div className="border-primary flex h-[238px] w-[393px] cursor-pointer flex-col rounded-[8px] border p-[21px] py-[15px]">
               <div className="flex flex-row gap-[10px]">
                 <span className="text-[20px] font-[700]">MKR, MATIC, TRC</span>
                 <span className="text-[20px] font-[700] text-[#D9D9D9]">
                   +4
                 </span>
               </div>
-              <p className="text-[#C3C3C3] text-[12px] font-[700]">
+              <p className="text-[12px] font-[700] text-[#C3C3C3]">
                 The newest tokens in the market
               </p>
-              <div className="flex flex-row mt-[26px] gap-[25px]">
-                <div className="flex flex-col w-[66px] ">
-                  <span className="h-[14px] text-[12px] text-[#C3C3C3] font-[700] ">
+              <div className="mt-[26px] flex flex-row gap-[25px]">
+                <div className="flex w-[66px] flex-col ">
+                  <span className="h-[14px] text-[12px] font-[700] text-[#C3C3C3] ">
                     1 MONTH
                   </span>
-                  <span className="flex flex-row mt-[6px] items-center text-[24px] h-[25px] font-[700]">
+                  <span className="mt-[6px] flex h-[25px] flex-row items-center text-[24px] font-[700]">
                     18%
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -166,15 +184,15 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                  <span className="text-[16px] h-[21px] font-[700] text-[#F24E1E]">
+                  <span className="h-[21px] text-[16px] font-[700] text-[#F24E1E]">
                     5/5
                   </span>
                 </div>
-                <div className="flex flex-col w-[66px] ">
-                  <span className="h-[14px] text-[12px] text-[#C3C3C3] font-[700] ">
+                <div className="flex w-[66px] flex-col ">
+                  <span className="h-[14px] text-[12px] font-[700] text-[#C3C3C3] ">
                     3 MONTH
                   </span>
-                  <span className="flex flex-row mt-[6px] items-center text-[24px] h-[25px] font-[700]">
+                  <span className="mt-[6px] flex h-[25px] flex-row items-center text-[24px] font-[700]">
                     40%
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -191,15 +209,15 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                  <span className="text-[16px] h-[21px] font-[700] text-[#0FA958]">
+                  <span className="h-[21px] text-[16px] font-[700] text-[#0FA958]">
                     3/5
                   </span>
                 </div>
-                <div className="flex flex-col w-[66px] ">
-                  <span className="h-[14px] text-[12px] text-[#C3C3C3] font-[700] ">
+                <div className="flex w-[66px] flex-col ">
+                  <span className="h-[14px] text-[12px] font-[700] text-[#C3C3C3] ">
                     6 MONTH
                   </span>
-                  <span className="flex flex-row mt-[6px] items-center text-[24px] h-[25px] font-[700]">
+                  <span className="mt-[6px] flex h-[25px] flex-row items-center text-[24px] font-[700]">
                     25%
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -216,26 +234,25 @@ export default function Home() {
                       />
                     </svg>
                   </span>
-                  <span className="text-[16px] h-[21px] font-[700] text-[#0FA958]">
+                  <span className="h-[21px] text-[16px] font-[700] text-[#0FA958]">
                     4/5
                   </span>
                 </div>
               </div>
               <div className="flex ">
-                <button className="mt-[26px] w-full bg-primary font-[700] text-white rounded-[5px] h-[40px]">
-                  Create
-                </button>
+                <Button className="mt-[26px] w-full">Create</Button>
               </div>
             </div>
             <Link href="/customise">
-              <div className="flex flex-col bg-primary items-center justify-center h-[238px] w-[393px] py-[15px] border border-primary rounded-[8px] p-[21px] cursor-pointer">
-                <p className="text-white text-[24px] font-bold w-[177px] leading-[28px] text-center">
-                  Customise your investment by choosing own set %  of tokens
-                </p>
+              <div className=" border-primary flex h-[238px] w-[393px] cursor-pointer flex-col items-center justify-center rounded-[8px] border p-[21px] py-[15px]">
+                <h2 className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                  Customise your investment by choosing own set % of tokens
+                </h2>
               </div>
             </Link>
           </div>
-        )}
-      </div>
-  );
+        </div>
+      )}
+    </div>
+  )
 }
