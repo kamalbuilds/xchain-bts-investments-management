@@ -1,12 +1,27 @@
 import React from "react"
+import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { degen } from "@/constants/degen"
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import { Avatar, AvatarImage } from "./ui/avatar"
+import { Button } from "./ui/button"
 
 type BTSDataType = {
-  tvl: string,
-  all_time_performance: number,
-  volume: number,
-  priceChange: number,
-  amount: string,
+  tvl: string
+  all_time_performance: number
+  volume: number
+  priceChange: number
+  amount: string
   total_supply: string
 }
 
@@ -16,11 +31,37 @@ type BotCardProps = {
   category: string
 }
 
-export const BotCard: React.FC<BotCardProps> = ({ title, btsData, category }) => {
+export const BotCard: React.FC<BotCardProps> = ({
+  title,
+  btsData,
+  category,
+}) => {
+  console.log("btsdata", btsData)
 
-    console.log(btsData,"btsdata")
+  const chunkArray = (array, size) => {
+    const result = []
+    for (let i = 0; i < array.length; i += size) {
+      result.push(array.slice(i, i + size))
+    }
+    return result
+  }
+
+  const groupedBtsData = chunkArray(btsData, 4)
+
+  console.log("groupedBtsData", groupedBtsData)
+
+  const router = useRouter()
+
+  const handleCardClick = (btsArray, index) => {
+    console.log("Bts Array", btsArray)
+    const btsIds = btsArray.map((item) => item._id)
+    const url = `/strategy/${index}?btsData=${JSON.stringify(btsIds)}`
+    console.log("URL", url)
+    router.push(url)
+  }
+
   return (
-    <div className="border-primary flex h-[238px] w-[393px] flex-col rounded-[8px] border p-[21px] py-[15px]">
+    <div className="">
       <div className="flex flex-row justify-between">
         <h3 className="text-[20px] font-[700]">{title}</h3>
         <Link href={`/bts/${category}`} legacyBehavior>
@@ -30,24 +71,80 @@ export const BotCard: React.FC<BotCardProps> = ({ title, btsData, category }) =>
       <p className="text-[12px] font-[700] text-[#C3C3C3]">
         The newest tokens in the market
       </p>
-      <div className="mt-[26px] flex flex-wrap gap-[10px]">
-        {/*  20 -> group in 4 and show in cards  */}
-        {btsData.slice(0, 4).map((bts, index) => (
-          <div key={index} className="flex flex-col w-[80px]">
-            <span className="text-[14px] font-[700]">{bts.amount}</span>
-            <span className="text-[12px] font-[700] text-[#C3C3C3]">{bts.tvl.usd}</span>
-          </div>
-        ))}
+      <div className="mt-[26px] flex flex-wrap gap-12">
+        {chunkArray(btsData, 4).map((btsArray, index) => {
+          console.log("btsArray", btsArray)
+          return (
+            <Card className="min-w-[450px]">
+              <CardHeader>
+                <CardTitle className="flex justify-between">
+                  {index + 1}. BTS Basket
+                  <Button onClick={() => handleCardClick(btsArray, index)}>
+                    Select
+                  </Button>
+                </CardTitle>
+                <CardDescription>
+                  Group of BTS Present in this basket{" "}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-4">
+                  {btsArray.map((bts) => {
+                    console.log("bts", bts)
+                    return (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <Image
+                            src={bts.uri}
+                            alt={bts.id}
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                          />
+
+                          <div className="flex flex-1 items-center justify-between ">
+                            <div className="flex flex-col">
+                              <h4 className="scroll-m-20 text-xl font-semibold capitalize tracking-tight">
+                                {bts.name}
+                              </h4>
+                              <p className="text-sm text-muted-foreground">
+                                TVL: {parseFloat(bts.total_supply)?.toFixed(2)}
+                              </p>
+                            </div>
+                            <div className="flex flex-col">
+                              <p className="text-end">
+                                ${bts.price.usd.toFixed(2)}
+                              </p>
+                              <p
+                                className={`text-end text-sm text-muted-foreground ${
+                                  bts["24hourPriceChange"] < 0
+                                    ? "text-red-600"
+                                    : "text-green-600"
+                                }`}
+                              >
+                                &#40; {bts["24hourPriceChange"].toFixed(2)}%
+                                &#41;
+                              </p>
+                            </div>{" "}
+                          </div>
+                        </div>
+                      </>
+                    )
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          )
+        })}
       </div>
     </div>
   )
 }
 
-
 // import React from 'react';
 
 // const BotCard = ({ title , btsData , category }) => {
-//   const renderCards = () => {   
+//   const renderCards = () => {
 //     const numCards = Math.ceil(btsData.length / 2);
 //     const cards = [];
 
@@ -55,7 +152,7 @@ export const BotCard: React.FC<BotCardProps> = ({ title, btsData, category }) =>
 //       const startIdx = i * 2;
 //       const endIdx = startIdx + 2;
 //       const btsSubset = btsData.slice(startIdx, endIdx);
-      
+
 //       cards.push(
 //         <div key={i} className="border-primary flex h-[238px] w-[393px] cursor-pointer flex-col rounded-[8px] border p-[21px] py-[15px]">
 //           <div className="flex flex-row gap-[10px]">

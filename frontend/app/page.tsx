@@ -2,25 +2,26 @@
 
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
+
+import { BASE_URL } from "@/config/address"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { BotCard } from "@/components/BotCard"
 
 import sendTelegramMessage from "../actions/welcome"
 import { InvestorCard } from "../components/investors/InvestorCard"
-import { BASE_URL } from "@/config/address"
-import { BotCard } from "@/components/BotCard"
 
 type BTSDataType = {
-  tvl: { usd: string },
-  all_time_performance: number,
-  '24hourVolume': number,
-  '24hourPriceChange': number,
-  amount: string,
+  tvl: { usd: string }
+  all_time_performance: number
+  "24hourVolume": number
+  "24hourPriceChange": number
+  amount: string
   total_supply: string
 }
 
 type CategorizedBTS = BTSDataType & {
-  score: number,
+  score: number
   category: string
 }
 
@@ -38,7 +39,7 @@ export default function Home() {
         const { docs } = response
 
         // Send only top 10 BTS token
-        const BTSData = docs;
+        const BTSData = docs
 
         // for faster testing with only 10 BTS tokens
         // const BTSData = docs.length > 10 ? docs.slice(0, 10) : docs
@@ -66,34 +67,39 @@ export default function Home() {
 
   function categorizeBTS(btsData: BTSDataType[]): CategorizedBTS[] {
     const maxValues = {
-      tvl: Math.max(...btsData.map(bts => parseFloat(bts.tvl.usd))),
-      performance: Math.max(...btsData.map(bts => bts.all_time_performance)),
-      volume: Math.max(...btsData.map(bts => bts['24hourVolume'])),
-      priceChange: Math.max(...btsData.map(bts => Math.abs(bts['24hourPriceChange']))),
-      amount: Math.max(...btsData.map(bts => parseFloat(bts.amount))),
-      supply: Math.max(...btsData.map(bts => parseFloat(bts.total_supply))),
+      tvl: Math.max(...btsData.map((bts) => parseFloat(bts.tvl.usd))),
+      performance: Math.max(...btsData.map((bts) => bts.all_time_performance)),
+      volume: Math.max(...btsData.map((bts) => bts["24hourVolume"])),
+      priceChange: Math.max(
+        ...btsData.map((bts) => Math.abs(bts["24hourPriceChange"]))
+      ),
+      amount: Math.max(...btsData.map((bts) => parseFloat(bts.amount))),
+      supply: Math.max(...btsData.map((bts) => parseFloat(bts.total_supply))),
     }
 
-    return btsData.map(bts => {
+    return btsData.map((bts) => {
       const normalizedTVL = parseFloat(bts.tvl.usd) / maxValues.tvl
-      const normalizedPerformance = bts.all_time_performance / maxValues.performance
-      const normalizedVolume = bts['24hourVolume'] / maxValues.volume
-      const normalizedPriceChange = 1 - (Math.abs(bts['24hourPriceChange']) / maxValues.priceChange)
+      const normalizedPerformance =
+        bts.all_time_performance / maxValues.performance
+      const normalizedVolume = bts["24hourVolume"] / maxValues.volume
+      const normalizedPriceChange =
+        1 - Math.abs(bts["24hourPriceChange"]) / maxValues.priceChange
       const normalizedAmount = parseFloat(bts.amount) / maxValues.amount
       const normalizedSupply = parseFloat(bts.total_supply) / maxValues.supply
 
-      const score = (0.3 * normalizedTVL) +
-        (0.2 * normalizedPerformance) +
-        (0.2 * normalizedVolume) -
-        (0.1 * normalizedPriceChange) +
-        (0.1 * normalizedAmount) +
-        (0.1 * normalizedSupply)
+      const score =
+        0.3 * normalizedTVL +
+        0.2 * normalizedPerformance +
+        0.2 * normalizedVolume -
+        0.1 * normalizedPriceChange +
+        0.1 * normalizedAmount +
+        0.1 * normalizedSupply
 
-      let category = 'Moderate'
+      let category = "Moderate"
       if (score > 0.75) {
-        category = 'Conservative'
+        category = "Conservative"
       } else if (score < 0.4) {
-        category = 'Degen'
+        category = "Degen"
       }
 
       return {
@@ -131,27 +137,25 @@ export default function Home() {
       </div>
 
       {selectedCard && (
-
-<>
-        // @kamal filter the bts data based on the category selected
-        // and pass it to the BotCard component
-        <BotCard
-          title={selectedCard}
-          key={selectedCard}
-          btsData={groupedBTS.filter(bts => bts.category.toLowerCase() === selectedCard.toLowerCase())}
-          category={selectedCard.toLowerCase()}
-        />
+        <>
+          <BotCard
+            title={selectedCard}
+            key={selectedCard}
+            btsData={groupedBTS.filter(
+              (bts) => bts.category.toLowerCase() === selectedCard.toLowerCase()
+            )}
+            category={selectedCard.toLowerCase()}
+          />
 
           <Link href="/customise">
-              <div className=" border-primary flex h-[238px] w-[393px] cursor-pointer flex-col items-center justify-center rounded-[8px] border p-[21px] py-[15px]">
-                <h2 className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-                  Customise your investment by choosing own set % of tokens
-                </h2>
-              </div>
-            </Link>
-
-            </>
-          )}
+            <div className=" border-primary flex h-[238px] w-[393px] cursor-pointer flex-col items-center justify-center rounded-[8px] border p-[21px] py-[15px]">
+              <h2 className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                Customise your investment by choosing own set % of tokens
+              </h2>
+            </div>
+          </Link>
+        </>
+      )}
     </div>
   )
 }
