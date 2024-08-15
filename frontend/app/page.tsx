@@ -34,17 +34,16 @@ export default function Home() {
 
       <div className="flex flex-col gap-12">
         <div className="flex flex-row justify-center gap-12 border-[#DCD2C7]">
-          {["CONSERVATIVE", "MODERATE", "DEGEN"].map(
-            (title, tagline, index) => (
-              <InvestorCard
-                selected={selectedCard === title}
-                title={title}
-                volume="1,690,850"
-                profit="$2011.08"
-                handleCardSelect={handleCardSelect}
-              />
-            )
-          )}
+          {["CONSERVATIVE", "MODERATE", "DEGEN"].map((title, index) => (
+            <InvestorCard
+              key={index}
+              selected={selectedCard === title}
+              title={title}
+              volume="1,690,850"
+              profit="$2011.08"
+              handleCardSelect={handleCardSelect}
+            />
+          ))}
         </div>
 
         <Separator />

@@ -12,12 +12,20 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const SelectChain = () => {
-  console.log("TokenList", ChainList)
-
+const SelectChain = ({
+  selectedChain,
+  setSelectedChain,
+}: {
+  selectedChain: string
+  setSelectedChain: (selectedChain: string) => void
+}) => {
   return (
     <div className="w-full">
-      <Select>
+      <Select
+        onValueChange={(value) => {
+          setSelectedChain(value)
+        }}
+      >
         <SelectTrigger className="">
           <SelectValue placeholder="Select Chain" />
         </SelectTrigger>
