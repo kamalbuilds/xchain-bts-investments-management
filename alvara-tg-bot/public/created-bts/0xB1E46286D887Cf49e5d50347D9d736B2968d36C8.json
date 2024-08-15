@@ -1,0 +1,850 @@
+{
+  "66224cb52981da5f60988ef3": {
+    "btsDetails": {
+      "_id": "66224cb52981da5f60988ef3",
+      "name": "Kornemi6 BTS",
+      "symbol": "Found test 1",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreieuh6d43b5l5fvwe5ess2dasaf7sgium44rdnhsg2zive6pkvipnq",
+      "address": "0x88F443423EE7f81AC74DB28489137bFfF999ac70",
+      "pair": "0xFdC8398812f93a5bE614942F1640B3Df24A27152",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "status": "Active",
+      "amount": "1000000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "553070.6425071898",
+      "initialTvl": "553070642.5071898",
+      "blockchain": "ethereum",
+      "timestamp": 1713523884,
+      "bts_tokens": [
+        "665bb7354eeca428072f534d",
+        "665bb7354eeca428072f5351",
+        "665bb7364eeca428072f5356",
+        "665bb7364eeca428072f5364",
+        "665bb7364eeca428072f5367",
+        "665bb7374eeca428072f536b",
+        "665bb7374eeca428072f536e"
+      ],
+      "bts_activity": [
+        "66224cb62981da5f60988efc",
+        "662270b32981da5f609a3f8d",
+        "662272042981da5f609a6c7a",
+        "6622730c2981da5f609a7ce0",
+        "662274382981da5f609a7db2",
+        "662274392981da5f609a7dc8",
+        "662690b880712ccecb9b23e7",
+        "662f84e92d618dea59a44481",
+        "6630c95db7b46968d8541205",
+        "66350a2c3b2f0942b9ded38c",
+        "663545d03b2f0942b9e1b36a",
+        "6636b1163b2f0942b9f3cabe",
+        "663756513b2f0942b9fc00d9",
+        "6637e56b3b2f0942b9035046",
+        "66381b313b2f0942b905f20a",
+        "66382a6d3b2f0942b906b3f1",
+        "663ab4d16fd98329aac6dc08",
+        "663bd06a6fd98329aad64c37",
+        "663dc14ac97fb582f7682f69",
+        "663e58776c8b0fb26e1db3cb",
+        "6640b1a06c8b0fb26e4144ef",
+        "664285366c8b0fb26e5cd694",
+        "664309a26c8b0fb26e64bce0",
+        "664358266c8b0fb26e696502",
+        "664608015b45d8996a21a058",
+        "6646254d5b45d8996a236b0b",
+        "66467ad95b45d8996a28ddde",
+        "6646830f5b45d8996a2997e3",
+        "6646aae65b45d8996a2c66e7",
+        "6646dc205b45d8996a303930",
+        "664714605b45d8996a349818",
+        "664715b65b45d8996a34cefd",
+        "664747ef5b45d8996a387fcf",
+        "664761b75b45d8996a3a5468",
+        "664766675b45d8996a3acb1e",
+        "66476a165b45d8996a3b2265",
+        "664780305b45d8996a3ce344",
+        "66479fd35b45d8996a3f693f",
+        "6647c1d05b45d8996a42433f",
+        "6647ceb45b45d8996a435b62",
+        "664879cc5b45d8996a518a70",
+        "6648f98a5b45d8996a5c2e73",
+        "664938d25b45d8996a620ed8",
+        "66494cbd5b45d8996a63ef5c",
+        "6649e0665b45d8996a7230a1",
+        "664a591b5b45d8996a7df7b9",
+        "664b0c685b45d8996a90854c",
+        "664b563c5b45d8996a98081c",
+        "664c2a7b5b45d8996aaef178",
+        "664c4fd15b45d8996ab2e1f3",
+        "664c74265b45d8996ab6e911",
+        "664cad925b45d8996abd490b",
+        "664d29ca5b45d8996acbe05c",
+        "664d7aad5b45d8996ad5ad9e",
+        "6655e5337cd24546cc47b0ca",
+        "6655e5337cd24546cc47b0c8",
+        "6655e5337cd24546cc47b0ce",
+        "6655e5337cd24546cc47b0c2",
+        "6655e5337cd24546cc47b0cc",
+        "6655e5337cd24546cc47b0c6",
+        "6655e5337cd24546cc47b0d2",
+        "6655e5337cd24546cc47b0da",
+        "6655e5337cd24546cc47b0d4",
+        "6655e5337cd24546cc47b0c4",
+        "6655e5337cd24546cc47b0d8",
+        "6655e5337cd24546cc47b0d0",
+        "6655e5337cd24546cc47b0d6",
+        "6655e5337cd24546cc47b0fa",
+        "6655e5337cd24546cc47b0de",
+        "6655e5337cd24546cc47b100",
+        "6655e5337cd24546cc47b0fc",
+        "6655e5337cd24546cc47b108",
+        "6655e5337cd24546cc47b0dc",
+        "6655e5337cd24546cc47b10a",
+        "6655e5337cd24546cc47b0e4",
+        "6655e5337cd24546cc47b0ec",
+        "6655e5337cd24546cc47b0e2",
+        "6655e5337cd24546cc47b106",
+        "6655e5337cd24546cc47b0f0",
+        "6655e5337cd24546cc47b110",
+        "6655e5337cd24546cc47b10e",
+        "6655e5337cd24546cc47b0f2",
+        "6655e5337cd24546cc47b102",
+        "6655e5337cd24546cc47b0ee",
+        "6655e5337cd24546cc47b0f8",
+        "6655e5337cd24546cc47b0e6",
+        "6655e5337cd24546cc47b0fe",
+        "6655e5337cd24546cc47b0f4",
+        "6655e5337cd24546cc47b104",
+        "6655e5337cd24546cc47b0ea",
+        "6655e5337cd24546cc47b0e0",
+        "6655e5337cd24546cc47b0e8",
+        "6655e5337cd24546cc47b0f6",
+        "6655e5337cd24546cc47b10c",
+        "6655e5347cd24546cc47b1ee",
+        "6655e5347cd24546cc47b202",
+        "6655e5347cd24546cc47b238",
+        "6655e5347cd24546cc47b200",
+        "6655e5347cd24546cc47b1fa",
+        "6655e5347cd24546cc47b1ea",
+        "6655e5347cd24546cc47b1d1",
+        "6655e5347cd24546cc47b1dd",
+        "6655e5347cd24546cc47b20a",
+        "6655e5347cd24546cc47b218",
+        "6655e5347cd24546cc47b1df",
+        "6655e5347cd24546cc47b1fc",
+        "6655e5347cd24546cc47b21c",
+        "6655e5347cd24546cc47b232",
+        "6655e5347cd24546cc47b220",
+        "6655e5347cd24546cc47b222",
+        "6655e5347cd24546cc47b204",
+        "6655e5347cd24546cc47b1db",
+        "6655e5347cd24546cc47b230",
+        "6655e5347cd24546cc47b1cf",
+        "6655e5347cd24546cc47b210",
+        "6655e5347cd24546cc47b1d5",
+        "6655e5347cd24546cc47b1d9",
+        "6655e5347cd24546cc47b236",
+        "6655e5347cd24546cc47b1d3",
+        "6655e5347cd24546cc47b1cd",
+        "6655e5347cd24546cc47b21e",
+        "6655e5347cd24546cc47b216",
+        "6655e5347cd24546cc47b234",
+        "6655e5347cd24546cc47b1f6",
+        "6655e5347cd24546cc47b214",
+        "6655e5347cd24546cc47b1ec",
+        "6655e5347cd24546cc47b1f8",
+        "6655e5347cd24546cc47b224",
+        "6655e5347cd24546cc47b1f0",
+        "6655e5347cd24546cc47b212",
+        "6655e5347cd24546cc47b1f2",
+        "6655e5347cd24546cc47b228",
+        "6655e5347cd24546cc47b206",
+        "6655e5347cd24546cc47b1e8",
+        "6655e5347cd24546cc47b22a",
+        "6655e5347cd24546cc47b1e2",
+        "6655e5347cd24546cc47b208",
+        "6655e5347cd24546cc47b23a",
+        "6655e5347cd24546cc47b1e6",
+        "6655e5347cd24546cc47b21a",
+        "6655e5347cd24546cc47b1f4",
+        "6655e5347cd24546cc47b20e",
+        "6655e5347cd24546cc47b1e4",
+        "6655e5347cd24546cc47b20c",
+        "6655e5347cd24546cc47b22c",
+        "6655e5347cd24546cc47b1d7",
+        "6655e5347cd24546cc47b226",
+        "6655e5347cd24546cc47b1fe",
+        "6655e5347cd24546cc47b22e",
+        "6657902f99d10325da1c8450",
+        "665dfef44eeca42807665586",
+        "665e87e34eeca4280773490d",
+        "665fa88e4eeca428078ddbc6",
+        "665faab44eeca428078e1b75",
+        "6660c74a4eeca42807ab0537",
+        "666499fe4eeca428070cdad5",
+        "66656de64eeca4280723a3d5",
+        "66663a644eeca4280737cdaa",
+        "6666c1c04eeca42807486377",
+        "666caf5a4eeca428071032e7",
+        "666e1cfb4eeca4280744a9c7",
+        "666f71f8364ed9ce3e9c334d",
+        "6672eef052df11e542660fe0",
+        "667881211212dc66f31d99b1",
+        "6678963f1212dc66f31fccd4",
+        "6678a0c196ad109272cad3ef",
+        "66795e9a077222b0bc73bbd7",
+        "66797d119afba0d99d32d8a1",
+        "667991119afba0d99d34dce9",
+        "6679f240fb87428afcef239d",
+        "667d706cd18ae768e571a6d4",
+        "667d80cc0e01b016cb40667a",
+        "667e6a030e01b016cb626229",
+        "668117960e01b016cbdc193f",
+        "6681dd9b0e01b016cb020c55",
+        "66899d970e01b016cb8cc18d",
+        "66899d970e01b016cb8cc18f",
+        "668a960c0e01b016cbc1780b",
+        "6692a808023d061aed027734",
+        "6692a808023d061aed027732",
+        "66ab9507023d061aed9b199f",
+        "66ab9507023d061aed9b19a1",
+        "66ab9507023d061aed9b19a3",
+        "66ab9507023d061aed9b19a7",
+        "66ab9509023d061aed9b19b4",
+        "66ab9509023d061aed9b19b6",
+        "66ab9509023d061aed9b19b8",
+        "66ab9509023d061aed9b19c2",
+        "66ab9509023d061aed9b19ba",
+        "66ab9509023d061aed9b19c0",
+        "66ab9509023d061aed9b19c4",
+        "66ab9509023d061aed9b19bc",
+        "66ab9509023d061aed9b19be",
+        "66abf880023d061aeda96c8b",
+        "66abf880023d061aeda96c8d",
+        "66b39bfc023d061aedc1650c",
+        "66b39bfc023d061aedc1650e",
+        "66b39bfc023d061aedc16510",
+        "66bcab94023d061aed1293c4",
+        "66bcab94023d061aed1293c2",
+        "66bcab94023d061aed1293c0",
+        "66bce168023d061aed1a8551"
+      ],
+      "all_time_performance": 174.44927156958724,
+      "price": [
+        {
+          "_id": "66bcfeb9023d061aed1eeaad",
+          "usd": 1517898.3496262182,
+          "bts": "66224cb52981da5f60988ef3",
+          "createdAt": "2024-08-14T19:00:09.171Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "66bcfeb9023d061aed1eeab1",
+          "usd": 3020997993.4138327,
+          "bts": "66224cb52981da5f60988ef3",
+          "createdAt": "2024-08-14T19:00:09.179Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": 174.44927156902932,
+      "24hourVolume": 2467927350.9055185,
+      "createdAt": "2024-04-19T10:51:33.773Z",
+      "updatedAt": "2024-08-14T19:00:09.232Z",
+      "__v": 225,
+      "users": [
+        "662f64688deabc9202e12511",
+        "662f64688deabc9202e12513",
+        "662f6e383deb352212f84688",
+        "662f73fd093b4d01252a0a1e",
+        "662f7402093b4d01252a0a2b",
+        "662f871e9b5ee1303d34aaf7",
+        "6630c95eb7b46968d8541211",
+        "6634c55a6f2233c644e2a365"
+      ],
+      "bts_tokens_balance": [
+        "6634c55c6f2233c644e2a36a",
+        "6634c55e6f2233c644e2a36f",
+        "6634c55f6f2233c644e2a374",
+        "6634c5616f2233c644e2a379",
+        "6634c5636f2233c644e2a37e",
+        "6634c5646f2233c644e2a383",
+        "6634c5666f2233c644e2a388"
+      ],
+      "total_supply": "1990.2505290672145",
+      "1LpBalance": "1517898.7531284173",
+      "last24Hours": [
+        {
+          "_id": "66bce29a023d061aed1ab6bb",
+          "usd": 1543305.100656088,
+          "bts": "66224cb52981da5f60988ef3",
+          "createdAt": "2024-08-14T17:00:10.566Z",
+          "__v": 0
+        },
+        {
+          "_id": "66bcf0bd023d061aed1cd80a",
+          "usd": 1539638.6797627772,
+          "bts": "66224cb52981da5f60988ef3",
+          "createdAt": "2024-08-14T18:00:29.574Z",
+          "__v": 0
+        },
+        {
+          "_id": "66bcfeb9023d061aed1eeaad",
+          "usd": 1517898.3496262182,
+          "bts": "66224cb52981da5f60988ef3",
+          "createdAt": "2024-08-14T19:00:09.171Z",
+          "__v": 0
+        }
+      ],
+      "1lpBalanceNumeric": 1517898.7531284173
+    }
+  },
+  "664d4ac55b45d8996acffcff": {
+    "btsDetails": {
+      "_id": "664d4ac55b45d8996acffcff",
+      "name": "Doge Killer BTS",
+      "symbol": "DGKBTS",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreiammxd4kmk3j3d3s2nemua6pvksez5dmbusanuqjxt4tjryjmmyoq",
+      "address": "0x83989Ac9F69Cc1ABA249F6671fF693F80a7ec0D5",
+      "pair": "0x88Bf1e4f067D65e73d474F6a7AA6E907762bbEdA",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "Only Doge Killer",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "3014.4118061924833",
+      "initialTvl": "3014411.8061924833",
+      "blockchain": "ethereum",
+      "timestamp": 1716341196,
+      "bts_tokens": [
+        "664d4ac55b45d8996acffcb5",
+        "664d4ac55b45d8996acffcdb"
+      ],
+      "bts_activity": [
+        "664d4aca5b45d8996acffd44"
+      ],
+      "all_time_performance": -26.127595082448092,
+      "bts_tokens_balance": [
+        "664d4acb5b45d8996acffdb0",
+        "664d4acc5b45d8996acffe4a"
+      ],
+      "price": [
+        {
+          "_id": "6692c220023d061aed061a6b",
+          "usd": 2226.8184953530013,
+          "bts": "664d4ac55b45d8996acffcff",
+          "createdAt": "2024-07-13T18:06:24.968Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "6692c220023d061aed061a6d",
+          "usd": 2226818.495353001,
+          "bts": "664d4ac55b45d8996acffcff",
+          "createdAt": "2024-07-13T18:06:24.974Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -26.599580144879305,
+      "24hourVolume": 806976.8150121751,
+      "1LpBalance": "2226.8184953530017",
+      "createdAt": "2024-05-22T01:30:45.945Z",
+      "updatedAt": "2024-07-13T18:06:24.991Z",
+      "__v": 3,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 2226.8184953530017
+    }
+  },
+  "6655e5597cd24546cc47cce0": {
+    "btsDetails": {
+      "_id": "6655e5597cd24546cc47cce0",
+      "name": "Wrapped BTC BTS",
+      "symbol": "WBTCBTS",
+      "uri": "https://files.alvara.xyz/ipfs/bafybeie34p5oeqaojxfvwgm5aodnqgonqntngstuahjedbdzumd77hxx2y",
+      "address": "0xea1A1E5143b2A13ed3bbBa7165c3EBD0cB162577",
+      "pair": "0x9a6CaaD6d3999CA58b60012c4DDEEa789DeA193A",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "Only Wrapped BTC ",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "1817.2862871809707",
+      "initialTvl": "1817286.2871809707",
+      "blockchain": "ethereum",
+      "timestamp": 1716518784,
+      "bts_tokens": [
+        "6655e54d7cd24546cc47c281",
+        "6655e5557cd24546cc47c998"
+      ],
+      "bts_activity": [
+        "6655e5687cd24546cc47d70a"
+      ],
+      "all_time_performance": -13.370309189650252,
+      "bts_tokens_balance": [
+        "6655e5807cd24546cc47e8e7",
+        "6655e5a07cd24546cc47ffbb"
+      ],
+      "price": [
+        {
+          "_id": "6692c25a023d061aed0620b1",
+          "usd": 1574.3094917237595,
+          "bts": "6655e5597cd24546cc47cce0",
+          "createdAt": "2024-07-13T18:07:22.714Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "6692c25a023d061aed0620b4",
+          "usd": 1574309.4917237596,
+          "bts": "6655e5597cd24546cc47cce0",
+          "createdAt": "2024-07-13T18:07:22.727Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -13.590818812252765,
+      "24hourVolume": 247614.37109256303,
+      "1LpBalance": "1574.3094917237597",
+      "createdAt": "2024-05-28T14:08:25.724Z",
+      "updatedAt": "2024-07-13T18:07:22.742Z",
+      "__v": 3,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 1574.3094917237597
+    }
+  },
+  "6655e5597cd24546cc47ccdb": {
+    "btsDetails": {
+      "_id": "6655e5597cd24546cc47ccdb",
+      "name": "Stargate BTS",
+      "symbol": "STGBTS",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreibbl7ox34zyj2veoumc5x3cfseeitvsjsnc2h74d334hmbkaeek6e",
+      "address": "0xd4288a00C02db73af38D221AB12c2ac89B7e4Ff1",
+      "pair": "0x12Ff72271ECD6708e29899920F579e5A57AC40f2",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "Only Stargate ",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "1820.621599552483",
+      "initialTvl": "1820621.599552483",
+      "blockchain": "ethereum",
+      "timestamp": 1716518340,
+      "bts_tokens": [
+        "6655e54d7cd24546cc47c26d",
+        "6655e5557cd24546cc47c979"
+      ],
+      "bts_activity": [
+        "6655e5687cd24546cc47d712"
+      ],
+      "all_time_performance": -14.725926370443085,
+      "bts_tokens_balance": [
+        "6655e5807cd24546cc47e8ed",
+        "6655e5a07cd24546cc480003"
+      ],
+      "price": [
+        {
+          "_id": "668fffaa023d061aeda21ab8",
+          "usd": 1552.5182033180013,
+          "bts": "6655e5597cd24546cc47ccdb",
+          "createdAt": "2024-07-11T15:52:10.388Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "668fffaa023d061aeda21abb",
+          "usd": 1552518.2033180012,
+          "bts": "6655e5597cd24546cc47ccdb",
+          "createdAt": "2024-07-11T15:52:10.396Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -14.942985367398533,
+      "24hourVolume": 272749.4833319569,
+      "1LpBalance": "1552.518203318001",
+      "createdAt": "2024-05-28T14:08:25.713Z",
+      "updatedAt": "2024-07-11T15:52:10.422Z",
+      "__v": 3,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 1552.518203318001
+    }
+  },
+  "6681d3d40e01b016cb000482": {
+    "btsDetails": {
+      "_id": "6681d3d40e01b016cb000482",
+      "name": "DCA WBTC/DOGE KILLER BTS",
+      "symbol": "DWBTCLEASH",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreiammxd4kmk3j3d3s2nemua6pvksez5dmbusanuqjxt4tjryjmmyoq",
+      "address": "0x1c008852aEDE221b22Bb4b6Cf03bA407edE45De6",
+      "pair": "0x1546C1F72aBD86705E84cB470bfaBbE7265822cC",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "DCA WBTC/DOGE KILLER",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": false,
+      "initialPrice": "692.6360425483979",
+      "initialTvl": "692636.0425483979",
+      "blockchain": "ethereum",
+      "timestamp": 1719784332,
+      "bts_tokens": [
+        "6681d3d00e01b016cb000432",
+        "6681d3d20e01b016cb000445",
+        "6681d3d40e01b016cb000480"
+      ],
+      "bts_activity": [
+        "6681d3d90e01b016cb0004bc"
+      ],
+      "all_time_performance": -9.121305480849909,
+      "bts_tokens_balance": [
+        "6681d3e00e01b016cb000565",
+        "6681d3e50e01b016cb0005a2",
+        "6681d3e90e01b016cb000620"
+      ],
+      "price": [
+        {
+          "_id": "668eb75a0e01b016cb6606bb",
+          "usd": 629.458593237089,
+          "bts": "6681d3d40e01b016cb000482",
+          "createdAt": "2024-07-10T16:31:22.368Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "668eb75a0e01b016cb6606c5",
+          "usd": 629458.593237089,
+          "bts": "6681d3d40e01b016cb000482",
+          "createdAt": "2024-07-10T16:31:22.392Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -9.951731246523913,
+      "24hourVolume": 69564.94375100033,
+      "1LpBalance": "629.458593237089",
+      "createdAt": "2024-06-30T21:53:24.778Z",
+      "updatedAt": "2024-07-10T16:31:22.448Z",
+      "__v": 4,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 629.458593237089
+    }
+  },
+  "6648f3b05b45d8996a5bf50f": {
+    "btsDetails": {
+      "_id": "6648f3b05b45d8996a5bf50f",
+      "name": "Tech BTS",
+      "symbol": "TBTS",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreicatfmvzwttsvxx7cqdlvjfnrxe7txbcvjscpulj2vkbdt3np3xb4",
+      "address": "0xeaFfca4FBb0F2EfF7a4b0576Abf27606A9b2aB59",
+      "pair": "0x3f32A82A8C43e96A4281b4c597163c6fE6ddb1C4",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "Technological",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "666.7725476745234",
+      "initialTvl": "666772.5476745233",
+      "blockchain": "ethereum",
+      "timestamp": 1716055272,
+      "bts_tokens": [
+        "6648f3af5b45d8996a5bf4e7",
+        "6648f3af5b45d8996a5bf4f1",
+        "6648f3af5b45d8996a5bf4fa",
+        "6648f3af5b45d8996a5bf503",
+        "6648f3b05b45d8996a5bf50a"
+      ],
+      "bts_activity": [
+        "6648f3b05b45d8996a5bf51e"
+      ],
+      "all_time_performance": -16.006909245273732,
+      "bts_tokens_balance": [
+        "6648f3b15b45d8996a5bf52f",
+        "6648f3b25b45d8996a5bf548",
+        "6648f3b25b45d8996a5bf561",
+        "6648f3b35b45d8996a5bf57f",
+        "6648f3b45b45d8996a5bf599"
+      ],
+      "price": [
+        {
+          "_id": "66b3ab43023d061aedc3ddeb",
+          "usd": 560.0428710958629,
+          "bts": "6648f3b05b45d8996a5bf50f",
+          "createdAt": "2024-08-07T17:13:39.786Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "66b3ab43023d061aedc3dded",
+          "usd": 560042.8710958629,
+          "bts": "6648f3b05b45d8996a5bf50f",
+          "createdAt": "2024-08-07T17:13:39.792Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -16.103465663156186,
+      "24hourVolume": 107497.0642813195,
+      "1LpBalance": "560.0428710958629",
+      "createdAt": "2024-05-18T18:30:08.254Z",
+      "updatedAt": "2024-08-07T17:13:39.811Z",
+      "__v": 6,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 560.0428710958629
+    }
+  },
+  "6677a4ac8e8ff8f058e474e2": {
+    "btsDetails": {
+      "_id": "6677a4ac8e8ff8f058e474e2",
+      "name": "DCA UNI/DOGE KILLER BTS",
+      "symbol": "DUNILEASH",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreiammxd4kmk3j3d3s2nemua6pvksez5dmbusanuqjxt4tjryjmmyoq",
+      "address": "0x1734cA749B59d4aE887D172e2f9389022C5ac478",
+      "pair": "0x0454953Eb8Bc7c4171BaF010beE13026be645795",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "DCA UNI/DOGE KILLER ",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "436.8756249037334",
+      "initialTvl": "436875.62490373343",
+      "blockchain": "ethereum",
+      "timestamp": 1719116928,
+      "bts_tokens": [
+        "6677a4aa8e8ff8f058e474cd",
+        "6677a4ab8e8ff8f058e474d2",
+        "6677a4ac8e8ff8f058e474e0"
+      ],
+      "bts_activity": [
+        "6677a4ae8e8ff8f058e474e9"
+      ],
+      "all_time_performance": -14.101345357381208,
+      "bts_tokens_balance": [
+        "6677a4b38e8ff8f058e474f3",
+        "6677a4b58e8ff8f058e47514",
+        "6677a4b78e8ff8f058e4751f"
+      ],
+      "price": [
+        {
+          "_id": "668eba5d0e01b016cb66bfff",
+          "usd": 375.27028425384066,
+          "bts": "6677a4ac8e8ff8f058e474e2",
+          "createdAt": "2024-07-10T16:44:13.487Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "668eba5d0e01b016cb66c013",
+          "usd": 375270.2842538407,
+          "bts": "6677a4ac8e8ff8f058e474e2",
+          "createdAt": "2024-07-10T16:44:13.510Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -10.445283673029811,
+      "24hourVolume": 43769.94014227489,
+      "1LpBalance": "375.2702842538406",
+      "createdAt": "2024-06-23T04:29:32.733Z",
+      "updatedAt": "2024-07-10T16:44:13.575Z",
+      "__v": 4,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 375.2702842538406
+    }
+  },
+  "6678c42ac398593cd9dab149": {
+    "btsDetails": {
+      "_id": "6678c42ac398593cd9dab149",
+      "name": "DCA LINK/DOGE KILLER BTS",
+      "symbol": "DLINKLEASH",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreiammxd4kmk3j3d3s2nemua6pvksez5dmbusanuqjxt4tjryjmmyoq",
+      "address": "0x42B33a900035733b0b2ed3Fca92549844B8c9fF6",
+      "pair": "0x42e775621d5A78FD24D684d40a69eEbE5f59A114",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "DCA LINK/DOGE KILLER",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": false,
+      "initialPrice": "425.7706835407499",
+      "initialTvl": "425770.68354074995",
+      "blockchain": "ethereum",
+      "timestamp": 1719190536,
+      "bts_tokens": [
+        "6678c427c398593cd9dab141",
+        "6678c429c398593cd9dab144",
+        "6678c42ac398593cd9dab147"
+      ],
+      "bts_activity": [
+        "6678c42bc398593cd9dab14e"
+      ],
+      "all_time_performance": -12.394049836188156,
+      "bts_tokens_balance": [
+        "6678c433c398593cd9dab156",
+        "6678c435c398593cd9dab15e",
+        "6678c437c398593cd9dab167"
+      ],
+      "price": [
+        {
+          "_id": "668eb2680e01b016cb64cb47",
+          "usd": 373.0004528348304,
+          "bts": "6678c42ac398593cd9dab149",
+          "createdAt": "2024-07-10T16:10:16.829Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "668eb2680e01b016cb64cb5b",
+          "usd": 373000.4528348304,
+          "bts": "6678c42ac398593cd9dab149",
+          "createdAt": "2024-07-10T16:10:16.907Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -13.728123639004925,
+      "24hourVolume": 59354.17832451925,
+      "1LpBalance": "373.0004528348304",
+      "createdAt": "2024-06-24T00:56:10.181Z",
+      "updatedAt": "2024-07-10T16:10:16.978Z",
+      "__v": 4,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 373.0004528348304
+    }
+  },
+  "666ba2044eeca42807e9926f": {
+    "btsDetails": {
+      "_id": "666ba2044eeca42807e9926f",
+      "name": "DCA AVAX/DOGE KILLER BTS",
+      "symbol": "DAVAXLEASH",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreiammxd4kmk3j3d3s2nemua6pvksez5dmbusanuqjxt4tjryjmmyoq",
+      "address": "0xF4231133895E116aFC3EA67Ed0FDa764e83ad560",
+      "pair": "0xda60dd9510deB566170b473554752ea22DFC0A5a",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "DCA AVAX/DOGE KILLER",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": true,
+      "initialPrice": "439.2522342982907",
+      "initialTvl": "439252.23429829074",
+      "blockchain": "ethereum",
+      "timestamp": 1718329764,
+      "bts_tokens": [
+        "666ba1fa4eeca42807e98fc6",
+        "666ba1fc4eeca42807e991a8",
+        "666ba2044eeca42807e9926c"
+      ],
+      "bts_activity": [
+        "666ba2094eeca42807e9964d"
+      ],
+      "all_time_performance": -19.025790689163834,
+      "bts_tokens_balance": [
+        "666ba2144eeca42807e99d58",
+        "666ba2194eeca42807e9a149",
+        "666ba21e4eeca42807e9a4ea"
+      ],
+      "price": [
+        {
+          "_id": "668eaefb0e01b016cb64064f",
+          "usd": 355.6810236032224,
+          "bts": "666ba2044eeca42807e9926f",
+          "createdAt": "2024-07-10T15:55:39.618Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "668eaefb0e01b016cb640660",
+          "usd": 355681.0236032224,
+          "bts": "666ba2044eeca42807e9926f",
+          "createdAt": "2024-07-10T15:55:39.644Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": -17.04383278587096,
+      "24hourVolume": 73076.7596308167,
+      "1LpBalance": "355.6810236032224",
+      "createdAt": "2024-06-14T01:51:00.242Z",
+      "updatedAt": "2024-07-10T15:55:39.705Z",
+      "__v": 4,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 355.6810236032224
+    }
+  },
+  "66898f4f0e01b016cb8a0fdc": {
+    "btsDetails": {
+      "_id": "66898f4f0e01b016cb8a0fdc",
+      "name": "DCA MATIC/DOGE KILLER BTS",
+      "symbol": "DMATICLEASH",
+      "uri": "https://files.alvara.xyz/ipfs/bafkreiammxd4kmk3j3d3s2nemua6pvksez5dmbusanuqjxt4tjryjmmyoq",
+      "address": "0x381037027A28D8a8464c241c83338cB426e86fbE",
+      "pair": "0xF2e5c975ad40ffe0B00FD1Ae669BdEcD3AbE7EA1",
+      "creator": "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8",
+      "description": "DCA MATIC/DOGE KILLER",
+      "status": "Active",
+      "amount": "10000000000000000",
+      "slippage": 50,
+      "autoRebalance": false,
+      "initialPrice": "341.9738623476197",
+      "initialTvl": "341973.86234761967",
+      "blockchain": "ethereum",
+      "timestamp": 1720291080,
+      "bts_tokens": [
+        "66898f4b0e01b016cb8a0f6a",
+        "66898f4d0e01b016cb8a0fa6",
+        "66898f4f0e01b016cb8a0fd8"
+      ],
+      "bts_activity": [
+        "66898f530e01b016cb8a101b"
+      ],
+      "all_time_performance": -1.967579894419858,
+      "bts_tokens_balance": [
+        "66898f5b0e01b016cb8a10e1",
+        "66898f5f0e01b016cb8a1150",
+        "66898f620e01b016cb8a11a1"
+      ],
+      "price": [
+        {
+          "_id": "668eaf9b0e01b016cb641457",
+          "usd": 335.24525338789687,
+          "bts": "66898f4f0e01b016cb8a0fdc",
+          "createdAt": "2024-07-10T15:58:19.598Z",
+          "__v": 0
+        }
+      ],
+      "tvl": [
+        {
+          "_id": "668eaf9b0e01b016cb64146d",
+          "usd": 335245.25338789687,
+          "bts": "66898f4f0e01b016cb8a0fdc",
+          "createdAt": "2024-07-10T15:58:19.640Z",
+          "__v": 0
+        }
+      ],
+      "24hourPriceChange": 0.8841681360096968,
+      "24hourVolume": 2938.153490986384,
+      "1LpBalance": "335.24525338789687",
+      "createdAt": "2024-07-06T18:39:11.189Z",
+      "updatedAt": "2024-07-10T15:58:19.801Z",
+      "__v": 4,
+      "total_supply": "1000",
+      "last24Hours": [],
+      "1lpBalanceNumeric": 335.24525338789687
+    }
+  }
+}

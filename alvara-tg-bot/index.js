@@ -4,7 +4,7 @@ const axios = require("axios");
 
 require("dotenv").config();
 
-const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require("node-telegram-bot-api");
 
 const { tokendetails } = require("./controllers/tokens.controllers.js");
 
@@ -35,16 +35,15 @@ app.use(bodyParser.json());
 
 const setwebhook = async () => {
   const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`);
-  console.log(res.data);
+  // console.log(res.data);
 };
 
-
-bot.on('message', (msg) => {
+bot.on("message", (msg) => {
   const chatId = msg.chat.id;
   const messageText = msg.text;
 
-  if (messageText === '/start') {
-    bot.sendMessage(chatId, 'Welcome to the bot!');
+  if (messageText === "/start") {
+    bot.sendMessage(chatId, "Welcome to the bot!");
   }
 });
 

@@ -20,8 +20,6 @@ const tokendetails = async () => {
     "24hourPriceChange",
     -1
   );
-  console.log("public/topTrendingToken >>>", topTrendingToken);
-
   // It creates a file in the public folder
   fs.writeFileSync(
     `public/topTrendingToken.json`,
@@ -29,7 +27,6 @@ const tokendetails = async () => {
   );
 
   const losingToken = await fetchTrendingTokens(1, 10, "24hourPriceChange", 1);
-  console.log("Losing Token", losingToken);
   fs.writeFileSync(
     `public/losingToken.json`,
     JSON.stringify(losingToken, null, 2)
