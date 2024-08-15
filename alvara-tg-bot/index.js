@@ -7,7 +7,8 @@ const { importWalletScene, importWalletStep } = require("./scenes");
 
 require("dotenv").config();
 
-const { tokendetails } = require("./controllers/tokens.controllers.js");
+const { trendingtokendetails , loosingtokendetails } = require("./controllers/tokens.controllers.js");
+
 const {
   checkContributedBTS,
   getUserBTSData,
@@ -28,14 +29,18 @@ bot.command("start", (ctx) => {
   const showWalletButton = createCallBackBtn("Show Wallet", "show-wallet");
   const checkBTSButton = createCallBackBtn("Check Contributed BTS", "check-contributed-bts");
   const getUserBTSButton = createCallBackBtn("Get User BTS Data", "get-user-bts-data");
-
+  const trendingTokens = createCallBackBtn("Trending Tokens", "trending-tokens");
+  const loosingTokens = createCallBackBtn("Loosing Tokens", "loosing-tokens");
+  
   ctx.reply(message, {
     reply_markup: {
       inline_keyboard: [
         [importWalletButton],
         [showWalletButton],
         [checkBTSButton],
-        [getUserBTSButton]
+        [getUserBTSButton],
+        [trendingTokens],
+        [loosingTokens]
       ],
     },
   });
@@ -57,8 +62,20 @@ bot.action("check-contributed-bts", async (ctx) => {
   if (ctx.session.wallet) {
     try {
       const contributedBTS = await checkContributedBTS(ctx.session.wallet.address);
-      const message = `Your contributed BTS:\n${JSON.stringify(contributedBTS, null, 2)}`;
-      ctx.reply(message);
+
+      const formattedMessage = Object.values(contributedBTS).map((bts) => {
+        return `
+          <b>Name:</b> ${bts.btsDetails.name}
+          <b>URI:</b> <a href="${bts.btsDetails.uri}">${bts.btsDetails.uri}</a>
+          <b>Address:</b> ${bts.btsDetails.address}
+          <b>All-Time Performance:</b> ${bts.btsDetails.all_time_performance}%
+          <b>TVL (USD):</b> $${bts.btsDetails.tvl[0].usd}
+          <b>Details:</b> <a href="${bts.btsDetails.link}">View BTS</a>
+        `;
+      }).join("\n\n");
+
+      ctx.replyWithHTML(`<b>Your contributed BTS 📜 :</b>\n\n${formattedMessage}`);
+
     } catch (error) {
       ctx.reply("There was an error fetching your contributed BTS.");
     }
@@ -67,12 +84,47 @@ bot.action("check-contributed-bts", async (ctx) => {
   }
 });
 
+bot.action("trending-tokens", async (ctx) => {
+  const trendingTokens = await trendingtokendetails();
+  const formattedMessage = Object.values(trendingTokens).map((token) => {
+    return `
+      <b>Name:</b> ${token.name}
+      <b>Symbol:</b> ${token.symbol}
+    `;
+  }).join("\n\n");
+
+  ctx.replyWithHTML(`<b>The Trending Tokens are :</b>\n\n${formattedMessage}`);
+});
+
+bot.action("loosing-tokens", async (ctx) => {
+  const trendingTokens = await loosingtokendetails();
+  const formattedMessage = Object.values(trendingTokens).map((token) => {
+    return `
+      <b>Name:</b> ${token.name}
+      <b>Symbol:</b> ${token.symbol}
+    `;
+  }).join("\n\n");
+
+  ctx.replyWithHTML(`<b>The Loosing 24hr Tokens are :</b>\n\n${formattedMessage}`);
+});
+
 bot.action("get-user-bts-data", async (ctx) => {
   if (ctx.session.wallet) {
     try {
       const userBTSData = await getUserBTSData(1, 10, ctx.session.wallet.address);
-      const message = `Your BTS data:\n${JSON.stringify(userBTSData, null, 2)}`;
-      ctx.reply(message);
+
+      const formattedMessage = Object.values(userBTSData).map((bts) => {
+        return `
+          <b>Name:</b> ${bts.btsDetails.name}
+          <b>URI:</b> <a href="${bts.btsDetails.uri}">${bts.btsDetails.uri}</a>
+          <b>Address:</b> ${bts.btsDetails.address}
+          <b>All-Time Performance:</b> ${bts.btsDetails.all_time_performance}%
+          <b>TVL (USD):</b> $${bts.btsDetails.tvl[0].usd}
+          <b>Details:</b> <a href="${bts.btsDetails.link}">View BTS</a>
+        `;
+      }).join("\n\n");
+
+      ctx.replyWithHTML(`<b>The BTS you have created :</b>\n\n${formattedMessage}`);
     } catch (error) {
       ctx.reply("There was an error fetching your BTS data.");
     }
@@ -95,7 +147,9 @@ const setwebhook = async () => {
   // console.log(res.data);
 };
 
-bot.on("message", (msg) => {
+// if user inputs /trendingtoken show him trending tokens
+
+bot.on("message", async (msg) => {
   const chatId = msg.chat.id;
   const messageText = msg.text;
 

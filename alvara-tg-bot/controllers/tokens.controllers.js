@@ -13,7 +13,7 @@ const fetchTrendingTokens = async (page, limit, sortBy, sortOrder) => {
   return BTSData;
 };
 
-const tokendetails = async () => {
+const trendingtokendetails = async () => {
   const topTrendingToken = await fetchTrendingTokens(
     1,
     10,
@@ -21,16 +21,26 @@ const tokendetails = async () => {
     -1
   );
   // It creates a file in the public folder
-  fs.writeFileSync(
-    `public/topTrendingToken.json`,
-    JSON.stringify(topTrendingToken, null, 2)
-  );
+  // fs.writeFileSync(
+  //   `public/topTrendingToken.json`,
+  //   JSON.stringify(topTrendingToken, null, 2)
+  // );
 
-  const losingToken = await fetchTrendingTokens(1, 10, "24hourPriceChange", 1);
-  fs.writeFileSync(
-    `public/losingToken.json`,
-    JSON.stringify(losingToken, null, 2)
-  );
+  return topTrendingToken;
 };
 
-module.exports = { tokendetails };
+const loosingtokendetails = async () => {
+
+  const losingToken = await fetchTrendingTokens(1, 10, "24hourPriceChange", 1);
+
+
+  // fs.writeFileSync(
+  //   `public/losingToken.json`,
+  //   JSON.stringify(losingToken, null, 2)
+  // );
+
+  return losingToken;
+};
+
+
+module.exports = { trendingtokendetails , loosingtokendetails };
