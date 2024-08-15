@@ -1,27 +1,45 @@
-"use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import SidePanel from "../../components/Layout/SideBar";
+"use client"
+
+import React, { useState } from "react"
+import Link from "next/link"
+import Checkbox from "react-custom-checkbox"
+
+import CustomiseForm from "@/components/customiseComponents/CustomiseForm"
+import Info from "@/components/customiseComponents/Info"
+
+import SidePanel from "../../components/Layout/SideBar"
+import AIsuggestions from "../../components/custom-components/AIAnalysis"
 import AddFunds from "../../components/custom-components/AddFunds"
-import ChooseToken from "../../components/custom-components/ChooseToken";
-import Checkbox from "react-custom-checkbox";
-import ChooseNetwork from "../../components/custom-components/ChooseNetwork";
-import SelectFallBack from "../../components/custom-components/SelectFallBack";
-import AIsuggestions from "../../components/custom-components/AIAnalysis";
+import ChooseNetwork from "../../components/custom-components/ChooseNetwork"
+import ChooseToken from "../../components/custom-components/ChooseToken"
+import SelectFallBack from "../../components/custom-components/SelectFallBack"
 
 const Customise = () => {
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   const handleSuggestionsChange = (checked) => {
-    setShowSuggestions(checked);
-    console.log("Suggestions checkbox checked: ", checked);
-  };
+    setShowSuggestions(checked)
+    console.log("Suggestions checkbox checked: ", checked)
+  }
 
   return (
+    <>
+      <div className="flex flex-row">
+        <div className="w-1/4">
+          <Info />
+        </div>
+
+        <div className="w-3/4">
+          <CustomiseForm />
+        </div>
+      </div>
+
       <div className="flex flex-row gap-[20px]">
         <SidePanel />
         <div className="flex flex-col">
-          <p className="text-[24px] font-[700]">Customise an AI BOT for your Investment</p>
+          <p className="text-[24px] font-[700]">
+            Customise an AI BOT for your Investment
+          </p>
           <AddFunds />
           <ChooseToken />
           <ChooseNetwork />
@@ -114,7 +132,8 @@ const Customise = () => {
           </div>
         </div>
       </div>
-  );
-};
+    </>
+  )
+}
 
-export default Customise;
+export default Customise
