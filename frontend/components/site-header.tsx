@@ -26,16 +26,7 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            <Link href="/" className="text-[20px] font-[500] text-primary">
-              Explore Investment Strategies
-            </Link>
-            <Link
-              href="/mybots"
-              className="text-[20px] font-[500] text-primary"
-            >
-              My Investment Bots
-            </Link>
-
+            
             <ConnectButton
               client={client}
               wallets={wallets}

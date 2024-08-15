@@ -9,7 +9,7 @@
 
 ## Basics
 
-* [Images & media](basics/images-and-media.md)
+* [Investment Categories](basics/investment-categories.md)
 * [Interactive blocks](basics/interactive-blocks.md)
 * [Alvara Investment TG Bot](basics/markdown.md)
 * [Integrations](basics/integrations.md)

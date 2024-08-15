@@ -15,8 +15,11 @@ export default function MyBots() {
 
   const name = searchparams.query;
 
-  const { id, first_name, last_name, username, photo_url, auth_date, hash } = name;
+  if (name) {
+    const { id, first_name, last_name, username, photo_url, auth_date, hash } = name;
 
+  }
+  
   const isLoggedIn = Boolean(id);
 
   console.log(id);
