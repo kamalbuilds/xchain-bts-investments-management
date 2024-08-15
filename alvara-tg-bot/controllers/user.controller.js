@@ -25,13 +25,15 @@ const getContributedBtsData = async (page, limit, address) => {
 // TODO: Change this address
 const address = "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8";
 
-const checkContributedBTS = async () => {
+const checkContributedBTS = async (address) => {
   const contributedBts = await getContributedBtsData(1, 10, address);
 
   fs.writeFileSync(
     `public/${address}.json`,
     JSON.stringify(contributedBts, null, 2)
   );
+
+  return contributedBts;
 };
 
 const usersBTSData = async (page, limit, address) => {
@@ -48,16 +50,43 @@ const usersBTSData = async (page, limit, address) => {
     return acc;
   }, {});
 
-  return btsData;
+
+  const filterBTSData = (data) => {
+    return data.map(bts => ({
+      name: bts.name,
+      uri: bts.uri,
+      address: bts.address,
+      all_time_performance: bts.all_time_performance,
+      tvl: bts.tvl.usd,
+      link: `https://testnet.alvara.xyz/#/bts/detail/${bts.id}`
+    }));
+  };
+
+  return filterBTSData(btsData);
+
+
 };
 
 const getUserBTSData = async () => {
   const btsDataOfuser = await usersBTSData(1, 10, address);
 
-  fs.writeFileSync(
-    `public/created-bts/${address}.json`,
-    JSON.stringify(btsDataOfuser, null, 2)
-  );
+  const filterBTSData = (data) => {
+    return data.map(bts => ({
+      name: bts.name,
+      uri: bts.uri,
+      address: bts.address,
+      all_time_performance: bts.all_time_performance,
+      tvl: bts.tvl.usd,
+      link: `https://testnet.alvara.xyz/#/bts/detail/${bts.id}`
+    }));
+  };
+
+  return filterBTSData(btsDataOfuser);
+
+  // fs.writeFileSync(
+  //   `public/created-bts/${address}.json`,
+  //   JSON.stringify(btsDataOfuser, null, 2)
+  // );
 };
 
 module.exports = { checkContributedBTS, getUserBTSData };

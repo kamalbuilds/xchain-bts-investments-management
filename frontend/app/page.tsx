@@ -142,7 +142,7 @@ export default function Home() {
           category={selectedCard.toLowerCase()}
         />
 
-<Link href="/customise">
+          <Link href="/customise">
               <div className=" border-primary flex h-[238px] w-[393px] cursor-pointer flex-col items-center justify-center rounded-[8px] border p-[21px] py-[15px]">
                 <h2 className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0">
                   Customise your investment by choosing own set % of tokens
