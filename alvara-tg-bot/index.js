@@ -142,6 +142,10 @@ const WEBHOOK_URL = "https://pinggy" + URI;
 
 app.use(bodyParser.json());
 
+app.get('/', (req , res ) => {
+  res.send("hello kamal")
+})
+
 const setwebhook = async () => {
   const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`);
   // console.log(res.data);
