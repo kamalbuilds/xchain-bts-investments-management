@@ -2,10 +2,23 @@
 
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
+import { toast } from "react-toastify"
+import {
+  getContract,
+  prepareContractCall,
+  sendBatchTransaction,
+  sendTransaction,
+  toWei,
+} from "thirdweb"
+import { sepolia } from "thirdweb/chains"
+import { useActiveAccount, useSendBatchTransaction } from "thirdweb/react"
 
 import { BASE_URL } from "@/config/address"
+import { client } from "@/config/wallet"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import {
   Table,
@@ -17,22 +30,24 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-interface Investments {
-  [btsId: string]: number // BTS ID as key, investment amount as value (0-100)
+type Investment = {
+  percentage: number
+  contractAddress: string // or any other type you need
+  amount?: number
+}
+
+type Investments = {
+  [btsId: string]: Investment
 }
 
 const StrategyPage = ({ strategy, bts }) => {
-  const router = useRouter()
-
   const searchParams = useSearchParams()
   const ArrayOfBTS = searchParams.get("btsData")
-  console.log("searchParams", searchParams, ArrayOfBTS, JSON.parse(ArrayOfBTS!))
 
   const fetchDataBasedOnId = async (id) => {
     const url = `${BASE_URL}/bts/${id}`
     const response = await fetch(url)
     const res = await response.json()
-    console.log("Response >>", res)
     return res
   }
 
@@ -44,37 +59,124 @@ const StrategyPage = ({ strategy, bts }) => {
           return fetchDataBasedOnId(id)
         })
       ).then((btsArray) => {
-        console.log("ArrayOfBTS >>", btsArray)
         setBTSData(btsArray)
       })
     }
   }, [ArrayOfBTS])
 
-  console.log("BTSData", BTSData)
-
   const [investments, setInvestments] = useState<Investments>({})
+  const [investAmount, setInvestAmount] = useState<string>("")
 
-  const handleInvestmentChange = (btsId, value) => {
+  const handleInvestmentChange = (bts, value) => {
     const newInvestments = { ...investments }
     const totalInvestment = Object.entries(newInvestments)
-      .filter(([key]) => key !== btsId) // Exclude the current BTS
-      .reduce((acc, [key, currValue]) => acc + currValue, 0)
-
-    // Calculate the remaining percentage available
+      .filter(([key]) => key !== bts.id)
+      .reduce((acc, [key, currValue]) => acc + currValue.percentage, 0)
     const remainingPercentage = 100 - totalInvestment
-
-    // Ensure the investment does not exceed the remaining percentage
-    newInvestments[btsId] = Math.min(value, remainingPercentage)
+    const percentage = Math.min(value, remainingPercentage)
+    newInvestments[bts.id] = {
+      percentage,
+      contractAddress: bts.address,
+    }
 
     setInvestments(newInvestments)
   }
 
-  console.log("Investments >>", investments)
 
-  const handleInvest = () => {
-    // Handle investment logic here
-    console.log("Investments:", investments)
-    // router.push("/confirmation")
+  const { mutate: sendBatch, data: transactionResult } =
+    useSendBatchTransaction()
+
+  const handleInvest = async () => {
+    if (!investAmount) return
+    if (!activeAccount) return
+    const totalAmount = parseFloat(investAmount) // Convert string to number
+
+    const actualInvestments = Object.entries(investments).reduce(
+      (acc, [btsId, investment]) => {
+        const percentage = investment.percentage
+        const investmentAmount = (totalAmount * percentage) / 100
+        acc[btsId] = {
+          ...investment,
+          amount: investmentAmount,
+        }
+        return acc
+      },
+      {} as Record<string, Investment>
+    )
+
+    for (const [btsId, investment] of Object.entries(actualInvestments)) {
+      contribute(investment)
+    }
+
+    // const transactionsArray = await Promise.all(
+    //   Object.values(actualInvestments).map(async (investment) => {
+    //     const amountWei = toWei(investment.amount!.toString())
+    //     const contract = getContract({
+    //       address: investment.contractAddress,
+    //       chain: sepolia,
+    //       client: client,
+    //     })
+    //     const transaction = prepareContractCall({
+    //       contract,
+    //       method: "function contribute(uint256 _slippage) external payable",
+    //       params: [BigInt(20)],
+    //       value: toWei(amountWei.toString()),
+    //     })
+
+    //     console.log("Transaction ", transaction)
+    //     return transaction
+    //   })
+    // )
+
+    // console.log("Batch TransactionsArray Array", transactionsArray)
+
+    // try {
+    //   const waitForReceiptOptions = await sendBatchTransaction({
+    //     account: activeAccount,
+    //     transactions: transactionsArray,
+    //   })
+
+    //   console.log("waitForReceiptOptions", waitForReceiptOptions)
+    // } catch (error) {
+    //   console.log("Error >>", error)
+    // }
+  }
+
+  const activeAccount = useActiveAccount()
+  const [loading, setLoading] = useState(false)
+
+  const contribute = async (actualInvestments: Investment) => {
+    if (actualInvestments && activeAccount) {
+      setLoading(true)
+      const contract = getContract({
+        address: actualInvestments.contractAddress,
+        chain: sepolia,
+        client: client,
+      })
+
+      const amount: number = actualInvestments.amount!
+
+      const transaction = prepareContractCall({
+        contract,
+        method: "function contribute(uint256 _slippage) external payable",
+        params: [BigInt(20)],
+        value: toWei(amount.toString()),
+      })
+
+      try {
+        const { transactionHash } = await sendTransaction({
+          account: activeAccount,
+          transaction,
+        })
+        setLoading(false)
+
+        console.log("transactionHash", transactionHash)
+      } catch (error: any) {
+        setLoading(false)
+        console.log("Error ", error)
+        toast.error("Error in transaction", error.message)
+      }
+    }
   }
 
   return (
@@ -89,6 +191,25 @@ const StrategyPage = ({ strategy, bts }) => {
         </p>
       </div>
       <div>
+        <div className="mb-4 ml-12 grid items-center justify-end gap-1.5">
+          <p className="max-w-[700px] text-lg text-muted-foreground">
+            Enter Amount (in ETH)
+          </p>
+          <Input
+            id="Funds"
+            placeholder="Enter Amount to invest"
+            type="text"
+            value={investAmount}
+            onChange={(e) => {
+              const value = e.target.value
+              setInvestAmount(value)
+            }}
+            className="mr-12 w-[20rem]"
+            min="0"
+            step="any" // Use step="1" for integers only or step="any" for decimals
+          />
+        </div>
+
         <Table>
           <TableCaption>Customise your contributions.</TableCaption>
           <TableHeader>
@@ -132,11 +253,10 @@ const StrategyPage = ({ strategy, bts }) => {
                   </TableCell>
                   <TableCell>
                     <p
-                      className={` text-sm text-muted-foreground ${
-                        bts["24hourPriceChange"] < 0
-                          ? "text-red-600"
-                          : "text-green-600"
-                      }`}
+                      className={`text-sm ${bts['24hourPriceChange'] < 0
+                        ? "text-red-600"
+                        : "text-green-600"
+                        }`}
                     >
                       &#40;{bts["24hourPriceChange"].toFixed(2)}%&#41;
                     </p>
@@ -145,13 +265,13 @@ const StrategyPage = ({ strategy, bts }) => {
                     <div className="flex items-center gap-2">
                       <Slider
                         onValueChange={(value) => {
-                          handleInvestmentChange(bts.id, value[0])
+                          handleInvestmentChange(bts, value[0])
                         }}
                         max={100}
-                        value={[investments[bts.id] || 0]} // Default to 0 if not set
+                        value={[investments[bts.id]?.percentage || 0]} // Default to 0 if not set
                         className="w-[250px]"
                       />
-                      <p>{investments[bts.id]} %</p>
+                      <p>{investments[bts.id]?.percentage} %</p>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -159,7 +279,7 @@ const StrategyPage = ({ strategy, bts }) => {
           </TableBody>
         </Table>
       </div>
-      <Button onClick={handleInvest}>Invest</Button>
+      <Button disabled={loading} onClick={handleInvest}>Invest</Button>
     </div>
   )
 }
