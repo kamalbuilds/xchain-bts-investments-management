@@ -1,8 +1,10 @@
 ## Investment Categories
 
-To categorize BTS (Basket Token Standard) based on the API return fields such as TVL (Total Value Locked), all-time performance, amount, 24-hour volume, 24-hour price change, total supply, and others, we have designed a robust categorization logic that considers multiple factors of all the BTSes.
+We have categorized BTSes (Basket Token Standard) based on multiple factors such as TVL (Total Value Locked), all-time performance, amount, 24-hour volume, 24-hour price change, total supply, and others, we have designed a robust categorization logic that considers multiple factors of all the BTSes.
 
-Here's a possible approach to group BTSs into categories for different types of investors like Conservative, Moderate, and Degen (Aggressive) Investors.
+Below is our approach to group BTSes into categories for different types of investors like Conservative, Moderate, and Degen (Aggressive) Investors.
+
+This approach ensures a balanced and data-driven way to group BTS tokens according to investor specific profiles.
 
 ### Categorization Logic
 
@@ -57,5 +59,3 @@ Where each factor is normalized between 0 and 1:
 
 - **Scoring & Normalization**: Each parameter is normalized to a 0-1 scale to account for different magnitudes. Higher scores lean towards more conservative investments.
 - **Category Assignment**: Based on the computed score, BTSs are grouped into one of three categories: Conservative, Moderate, or Degen.
-  
-This approach ensures a balanced and data-driven way to group BTS tokens according to investor profiles.

@@ -7,11 +7,11 @@
 * [Introduction](getting-started/introduction.md)
 * [Quickstart](getting-started/quickstart.md)
 
-## Basics
+## How it works
 
-* [Investment Categories](basics/investment-categories.md)
-* [Interactive blocks](basics/interactive-blocks.md)
-* [Alvara Investment TG Bot](basics/markdown.md)
-* [Integrations](basics/integrations.md)
-* [Editor](basics/editor.md)
-* [OpenAPI](basics/openapi.md)
+* [Investment Categories](how-it-works/investment-categories.md)
+* [Interactive blocks](how-it-works/interactive-blocks.md)
+* [Alvara Investment TG Bot](how-it-works/markdown.md)
+* [Integrations](how-it-works/integrations.md)
+* [Editor](how-it-works/editor.md)
+* [OpenAPI](how-it-works/openapi.md)
