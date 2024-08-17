@@ -9,7 +9,10 @@ const { btsabi } = require("./abis/bts.js");
 
 require("dotenv").config();
 
-const { trendingtokendetails , loosingtokendetails } = require("./controllers/tokens.controllers.js");
+const {
+  trendingtokendetails,
+  loosingtokendetails,
+} = require("./controllers/tokens.controllers.js");
 
 const {
   checkContributedBTS,
@@ -18,6 +21,7 @@ const {
 
 const app = express();
 const port = process.env.PORT || 3001;
+
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new Telegraf(BOT_TOKEN);
 const stage = new Scenes.Stage([importWalletStep]);
@@ -31,13 +35,25 @@ bot.use(stage.middleware());
 
 bot.command("start", (ctx) => {
   const message = `Welcome to the XChain-BTS-Investment Bot!`;
-  const importWalletButton = createCallBackBtn("Import Wallet", "import-wallet");
+  const importWalletButton = createCallBackBtn(
+    "Import Wallet",
+    "import-wallet"
+  );
   const showWalletButton = createCallBackBtn("Show Wallet", "show-wallet");
-  const checkBTSButton = createCallBackBtn("Check Contributed BTS", "check-contributed-bts");
-  const getUserBTSButton = createCallBackBtn("Get User BTS Data", "get-user-bts-data");
-  const trendingTokens = createCallBackBtn("Trending Tokens", "trending-tokens");
+  const checkBTSButton = createCallBackBtn(
+    "Check Contributed BTS",
+    "check-contributed-bts"
+  );
+  const getUserBTSButton = createCallBackBtn(
+    "Get User BTS Data",
+    "get-user-bts-data"
+  );
+  const trendingTokens = createCallBackBtn(
+    "Trending Tokens",
+    "trending-tokens"
+  );
   const loosingTokens = createCallBackBtn("Loosing Tokens", "loosing-tokens");
-  
+
   ctx.reply(message, {
     reply_markup: {
       inline_keyboard: [
@@ -46,7 +62,7 @@ bot.command("start", (ctx) => {
         [checkBTSButton],
         [getUserBTSButton],
         [trendingTokens],
-        [loosingTokens]
+        [loosingTokens],
       ],
     },
   });
@@ -103,10 +119,13 @@ bot.action("check-contributed-bts", async (ctx) => {
 
   if (ctx.session.wallet) {
     try {
-      const contributedBTS = await checkContributedBTS(ctx.session.wallet.address);
+      const contributedBTS = await checkContributedBTS(
+        ctx.session.wallet.address
+      );
 
-      const formattedMessage = Object.values(contributedBTS).map((bts) => {
-        return `
+      const formattedMessage = Object.values(contributedBTS)
+        .map((bts) => {
+          return `
           <b>Name:</b> ${bts.btsDetails.name}
           <b>URI:</b> <a href="${bts.btsDetails.uri}">${bts.btsDetails.uri}</a>
           <b>Address:</b> ${bts.btsDetails.address}
@@ -114,10 +133,12 @@ bot.action("check-contributed-bts", async (ctx) => {
           <b>TVL (USD):</b> $${bts.btsDetails.tvl[0].usd}
           <b>Details:</b> <a href="${bts.btsDetails.link}">View BTS</a>
         `;
-      }).join("\n\n");
+        })
+        .join("\n\n");
 
-      ctx.replyWithHTML(`<b>Your contributed BTS 📜 :</b>\n\n${formattedMessage}`);
-
+      ctx.replyWithHTML(
+        `<b>Your contributed BTS 📜 :</b>\n\n${formattedMessage}`
+      );
     } catch (error) {
       ctx.reply("There was an error fetching your contributed BTS.");
     }
@@ -128,35 +149,46 @@ bot.action("check-contributed-bts", async (ctx) => {
 
 bot.action("trending-tokens", async (ctx) => {
   const trendingTokens = await trendingtokendetails();
-  const formattedMessage = Object.values(trendingTokens).map((token) => {
-    return `
+  const formattedMessage = Object.values(trendingTokens)
+    .map((token) => {
+      return `
       <b>Name:</b> ${token.name}
       <b>Symbol:</b> ${token.symbol}
     `;
-  }).join("\n\n");
+    })
+    .join("\n\n");
 
   ctx.replyWithHTML(`<b>The Trending Tokens are :</b>\n\n${formattedMessage}`);
 });
 
 bot.action("loosing-tokens", async (ctx) => {
   const trendingTokens = await loosingtokendetails();
-  const formattedMessage = Object.values(trendingTokens).map((token) => {
-    return `
+  const formattedMessage = Object.values(trendingTokens)
+    .map((token) => {
+      return `
       <b>Name:</b> ${token.name}
       <b>Symbol:</b> ${token.symbol}
     `;
-  }).join("\n\n");
+    })
+    .join("\n\n");
 
-  ctx.replyWithHTML(`<b>The Loosing 24hr Tokens are :</b>\n\n${formattedMessage}`);
+  ctx.replyWithHTML(
+    `<b>The Loosing 24hr Tokens are :</b>\n\n${formattedMessage}`
+  );
 });
 
 bot.action("get-user-bts-data", async (ctx) => {
   if (ctx.session.wallet) {
     try {
-      const userBTSData = await getUserBTSData(1, 10, ctx.session.wallet.address);
+      const userBTSData = await getUserBTSData(
+        1,
+        10,
+        ctx.session.wallet.address
+      );
 
-      const formattedMessage = Object.values(userBTSData).map((bts) => {
-        return `
+      const formattedMessage = Object.values(userBTSData)
+        .map((bts) => {
+          return `
           <b>Name:</b> ${bts.btsDetails.name}
           <b>URI:</b> <a href="${bts.btsDetails.uri}">${bts.btsDetails.uri}</a>
           <b>Address:</b> ${bts.btsDetails.address}
@@ -164,9 +196,12 @@ bot.action("get-user-bts-data", async (ctx) => {
           <b>TVL (USD):</b> $${bts.btsDetails.tvl[0].usd}
           <b>Details:</b> <a href="${bts.btsDetails.link}">View BTS</a>
         `;
-      }).join("\n\n");
+        })
+        .join("\n\n");
 
-      ctx.replyWithHTML(`<b>The BTS you have created :</b>\n\n${formattedMessage}`);
+      ctx.replyWithHTML(
+        `<b>The BTS you have created :</b>\n\n${formattedMessage}`
+      );
     } catch (error) {
       ctx.reply("There was an error fetching your BTS data.");
     }
@@ -174,7 +209,6 @@ bot.action("get-user-bts-data", async (ctx) => {
     ctx.reply("You need to import your wallet first.");
   }
 });
-
 
 bot.launch();
 
@@ -184,9 +218,9 @@ const WEBHOOK_URL = "https://pinggy" + URI;
 
 app.use(bodyParser.json());
 
-app.get('/', (req , res ) => {
-  res.send("hello kamal")
-})
+app.get("/", (req, res) => {
+  res.send("hello kamal");
+});
 
 const setwebhook = async () => {
   const res = await axios.get(`${TELEGRAM_API}/setWebhook?url=${WEBHOOK_URL}`);

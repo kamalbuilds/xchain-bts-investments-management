@@ -2,7 +2,7 @@ const { BASE_URL } = require("../constants");
 const fs = require("fs");
 
 const fetchTrendingTokens = async (page, limit, sortBy, sortOrder) => {
-  const url = `${BASE_URL}/bts/trending?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+  const url = `${BASE_URL}/bts?page=${page}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
 
   const res = await fetch(url);
   const response = await res.json();
@@ -30,9 +30,7 @@ const trendingtokendetails = async () => {
 };
 
 const loosingtokendetails = async () => {
-
   const losingToken = await fetchTrendingTokens(1, 10, "24hourPriceChange", 1);
-
 
   // fs.writeFileSync(
   //   `public/losingToken.json`,
@@ -42,5 +40,4 @@ const loosingtokendetails = async () => {
   return losingToken;
 };
 
-
-module.exports = { trendingtokendetails , loosingtokendetails };
+module.exports = { trendingtokendetails, loosingtokendetails };
