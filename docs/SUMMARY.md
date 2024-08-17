@@ -15,3 +15,7 @@
 * [Integrations](how-it-works/integrations.md)
 * [Editor](how-it-works/editor.md)
 * [OpenAPI](how-it-works/openapi.md)
+
+## Features we Provide
+
+* [Features](features/features.md)
