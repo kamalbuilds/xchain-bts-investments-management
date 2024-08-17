@@ -5,6 +5,7 @@ const getContributedBtsData = async (page, limit, address) => {
 
   const res = await fetch(url);
   const response = await res.json();
+
   const { users } = response.data;
 
   // It generates a key value pair
@@ -22,16 +23,13 @@ const getContributedBtsData = async (page, limit, address) => {
   return btsData;
 };
 
-// TODO: Change this address
-const address = "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8";
-
 const checkContributedBTS = async (address) => {
-  const contributedBts = await getContributedBtsData(1, 10, 0xB1E46286D887Cf49e5d50347D9d736B2968d36C8);
+  const contributedBts = await getContributedBtsData(1, 10, address);
 
-  fs.writeFileSync(
-    `public/${address}.json`,
-    JSON.stringify(contributedBts, null, 2)
-  );
+  // fs.writeFileSync(
+  //   `public/${address}.json`,
+  //   JSON.stringify(contributedBts, null, 2)
+  // );
 
   return contributedBts;
 };
@@ -41,6 +39,8 @@ const usersBTSData = async (page, limit, address) => {
 
   const res = await fetch(url);
   const response = await res.json();
+  console.log("Response >>", response);
+
   const { users } = response;
 
   const btsData = users.reduce((acc, user) => {
@@ -50,34 +50,17 @@ const usersBTSData = async (page, limit, address) => {
     return acc;
   }, {});
 
-  return btsData
-
+  return btsData;
 };
 
-const getUserBTSData = async (start , end , address) => {
-  const btsDataOfuser = await usersBTSData(start , end , "0xB1E46286D887Cf49e5d50347D9d736B2968d36C8");
+const getUserBTSData = async (start, end, address) => {
+  const btsDataOfuser = await usersBTSData(start, end, address);
 
-  fs.writeFileSync(
-    `public/created-bts/${address}.json`,
-    JSON.stringify(btsDataOfuser, null, 2)
-  );
+  // fs.writeFileSync(
+  //   `public/created-bts/${address}.json`,
+  //   JSON.stringify(btsDataOfuser, null, 2)
+  // );
   return btsDataOfuser;
-  // const filterBTSData = (data) => {
-  //   return data.map(bts => ({
-  //     name: bts.name,
-  //     uri: bts.uri,
-  //     address: bts.address,
-  //     all_time_performance: bts.all_time_performance,
-  //     tvl: bts.tvl.usd,
-  //     link: `https://testnet.alvara.xyz/#/bts/detail/${bts.id}`
-  //   }));
-  // };
-
-  // const getuserdata = filterBTSData(btsDataOfuser);
-
-  // console.log(getuserdata);
-
-  // return getuserdata;
 };
 
 module.exports = { checkContributedBTS, getUserBTSData };
