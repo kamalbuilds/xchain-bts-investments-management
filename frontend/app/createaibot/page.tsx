@@ -28,14 +28,14 @@ export default function MyBots() {
     if (isLoggedIn && id) {
       const welcomeMessage = "Welcome to the XChain-BTS-Investment Bot!";
       sendTelegramMessage(id, welcomeMessage)
-        .then((response : any) => console.log("Message sent:", response))
-        .catch((error : any) => console.error("Error:", error));
+        .then((response: any) => console.log("Message sent:", response))
+        .catch((error: any) => console.error("Error:", error));
     }
   }, [id, isLoggedIn]);
 
   useEffect(() => {
     const fetchData = async () => {
-        // fetch the data from the coingecko api
+      // fetch the data from the coingecko api
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${selectedCurrency}/ohlc?vs_currency=usd&days=14`
       );
@@ -85,12 +85,12 @@ export default function MyBots() {
           </div>
           <div className="absolute top-[125px] right-[30px]">
             {!isLoggedIn ? (
-                <TelegramLoginButton
-                botName="EntropyTesting_Bot"
+              <TelegramLoginButton
+                botName="alvara_xchain_investment_bot"
                 dataOnauth={(user) => console.log(user)}
                 dataAuthUrl="https://xchain-alvara-investments.vercel.app/myaibot"
                 cornerRadius={5}
-                />
+              />
             ) : (
               <div className="flex flex-row gap-[5px] px-[10px] items-center rounded-[5px] bg-[#54A9EA] w-[160px] h-[40px]">
                 <img

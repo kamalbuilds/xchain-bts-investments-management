@@ -2,8 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const { Telegraf, Scenes, session } = require("telegraf");
-const { createCallBackBtn } = require("./utils");
+const { createCallBackBtn, decrypt } = require("./utils");
 const { importWalletScene, importWalletStep } = require("./scenes");
+const { ethers } = require("ethers");
+const { btsabi } = require("./abis/bts.js");
 
 require("dotenv").config();
 
@@ -19,6 +21,10 @@ const port = process.env.PORT || 3001;
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new Telegraf(BOT_TOKEN);
 const stage = new Scenes.Stage([importWalletStep]);
+
+
+const provider = new ethers.providers.JsonRpcProvider(process.env.ETH_RPC_SEPOLIA)
+
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -46,6 +52,41 @@ bot.command("start", (ctx) => {
   });
 });
 
+// @kamal example value - /contributetobts 0x88f443423ee7f81ac74db28489137bfff999ac70 100
+bot.command("contributetobts", async (ctx) => {
+
+  if(!ctx.session.wallet) { return ctx.reply("import wallet first")};
+  
+  console.log(ctx.session.wallet);
+
+  const pvtkey = decrypt(ctx.session.wallet.privateKey);
+  console.log("decr",pvtkey);
+
+  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+
+
+  const chatId = ctx.chat.id;
+  const messageText = ctx.message.text;
+  const match = messageText.match(/\/contributetobts\s+(\w+)\s+(\d+(\.\d+)?)/); // @kamal use regex to match two parameters
+
+  if (!match) {
+      return ctx.reply("Please provide a valid BTS address and amount. Usage: /contributetobts <bts_address> <amount>");
+  }
+
+  const btsAddress = match[1]; // Extract the BTS address
+  const amount = match[2]; // Extract the amount
+  const amountToSend = ethers.utils.parseUnits(amount, 18); // Amount of tokens to deposit
+
+  const Contract = new ethers.Contract(btsAddress, btsabi, wallet);
+  try {
+      const tx = await Contract.contribute( BigInt(10), { value : amountToSend ,gasLimit: 200000 });
+      await tx.wait(); // Wait for the transaction to be mined
+      ctx.reply(`Successfully contributed ${amount} tokens to the BTS at ${btsAddress}. Transaction hash: ${tx.hash}`);
+  } catch (error) {
+      ctx.reply(`Error: ${error.message}`);
+  }
+});
+
 bot.action("import-wallet", (ctx) => {
   ctx.scene.enter(importWalletScene);
 });
@@ -59,6 +100,7 @@ bot.action("show-wallet", (ctx) => {
 });
 
 bot.action("check-contributed-bts", async (ctx) => {
+
   if (ctx.session.wallet) {
     try {
       const contributedBTS = await checkContributedBTS(ctx.session.wallet.address);
@@ -159,6 +201,8 @@ bot.on("message", async (msg) => {
 
   if (messageText === "/start") {
     bot.sendMessage(chatId, "Welcome to the bot!");
+  } else if (messageText === "/trendingtoken") {
+    bot.sendMessage(chatId, "Trending tokens are: ");
   }
 });
 
