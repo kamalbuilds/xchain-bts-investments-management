@@ -10,7 +10,7 @@ const tokenAddresses = {
   dai: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
 };
 
-export default async function handler(req : NextApiRequest, res : NextApiResponse) {
+export default async function handler(req , res ) {
   try {
     // Get the token parameter or default to 'usdc'
     const token = req.query.token || "usdc";

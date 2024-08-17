@@ -9,7 +9,9 @@ export default async function handler(req, res) {
 
     const firstTenPools = coingeckoResponse.data.data.slice(0, 10);
 
-    const openai = new OpenAI();
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     // Create a message for GPT-3.5-turbo model
     const message = {

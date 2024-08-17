@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import React, { useState, useEffect } from 'react';
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart"

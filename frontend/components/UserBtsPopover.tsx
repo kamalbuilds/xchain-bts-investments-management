@@ -51,7 +51,7 @@ const UserBtsPopover = ({
                     <Command>
                         <CommandList>
                             <CommandGroup>
-                                {userDetails.map((userDetail) => (
+                                {userDetails.map((userDetail : any) => (
                                     <CommandItem
                                         key={userDetail._id}
                                         value={userDetail.btsDetails.name}

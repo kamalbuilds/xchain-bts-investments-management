@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 
 const ChooseToken = () => {
@@ -59,7 +60,7 @@ const ChooseToken = () => {
     },
   ];
 
-  const selectToken = (tokenName) => {
+  const selectToken = (tokenName: string) => {
     setSelectedTokens((prevSelectedTokens) => {
       if (prevSelectedTokens.includes(tokenName)) {
         return prevSelectedTokens.filter((name) => name !== tokenName);

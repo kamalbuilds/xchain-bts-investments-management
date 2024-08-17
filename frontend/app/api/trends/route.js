@@ -23,7 +23,7 @@ const cryptoMapping = {
   usdt: "tether",
 };
 
-export default async function handler(req: NextApiRequest, res : NextApiResponse) {
+export default async function handler(req, res ) {
   try {
     const cryptoQueryId = req.query.Id;
     const cryptoId = cryptoMapping[cryptoQueryId.toLowerCase()] || "eth";
