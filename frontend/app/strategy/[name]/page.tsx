@@ -83,7 +83,6 @@ const StrategyPage = ({ strategy, bts }) => {
     setInvestments(newInvestments)
   }
 
-
   const { mutate: sendBatch, data: transactionResult } =
     useSendBatchTransaction()
 
@@ -108,39 +107,6 @@ const StrategyPage = ({ strategy, bts }) => {
     for (const [btsId, investment] of Object.entries(actualInvestments)) {
       contribute(investment)
     }
-
-    // const transactionsArray = await Promise.all(
-    //   Object.values(actualInvestments).map(async (investment) => {
-    //     const amountWei = toWei(investment.amount!.toString())
-    //     const contract = getContract({
-    //       address: investment.contractAddress,
-    //       chain: sepolia,
-    //       client: client,
-    //     })
-    //     const transaction = prepareContractCall({
-    //       contract,
-    //       method: "function contribute(uint256 _slippage) external payable",
-    //       params: [BigInt(20)],
-    //       value: toWei(amountWei.toString()),
-    //     })
-
-    //     console.log("Transaction ", transaction)
-    //     return transaction
-    //   })
-    // )
-
-    // console.log("Batch TransactionsArray Array", transactionsArray)
-
-    // try {
-    //   const waitForReceiptOptions = await sendBatchTransaction({
-    //     account: activeAccount,
-    //     transactions: transactionsArray,
-    //   })
-
-    //   console.log("waitForReceiptOptions", waitForReceiptOptions)
-    // } catch (error) {
-    //   console.log("Error >>", error)
-    // }
   }
 
   const activeAccount = useActiveAccount()
@@ -254,10 +220,11 @@ const StrategyPage = ({ strategy, bts }) => {
                   </TableCell>
                   <TableCell>
                     <p
-                      className={`text-sm ${bts['24hourPriceChange'] < 0
-                        ? "text-red-600"
-                        : "text-green-600"
-                        }`}
+                      className={`text-sm ${
+                        bts["24hourPriceChange"] < 0
+                          ? "text-red-600"
+                          : "text-green-600"
+                      }`}
                     >
                       &#40;{bts["24hourPriceChange"].toLocaleString()}%&#41;
                     </p>
@@ -282,7 +249,14 @@ const StrategyPage = ({ strategy, bts }) => {
       </div>
       <div className="flex justify-center pt-4">
         <div>
-          <Button size='lg' className="w-[250px]" disabled={loading} onClick={handleInvest}>Invest</Button>
+          <Button
+            size="lg"
+            className="w-[250px]"
+            disabled={loading}
+            onClick={handleInvest}
+          >
+            Invest
+          </Button>
         </div>
       </div>
     </div>

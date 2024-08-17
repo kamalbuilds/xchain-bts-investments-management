@@ -50,8 +50,6 @@ export default function MyBots() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Selected Currency", selectedCurrency)
-
       // fetch the data from the coingecko api
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${selectedCurrency}/ohlc?vs_currency=usd&days=14`
@@ -60,7 +58,6 @@ export default function MyBots() {
         x: new Date(x[0]),
         y: [x[1], x[2], x[3], x[4]],
       }))
-      console.log("Formatted data ", formattedData)
 
       setSeries([{ data: formattedData }])
     }
@@ -86,8 +83,6 @@ export default function MyBots() {
       mode: "light",
     },
   }
-
-  console.log("Options >>", options)
 
   const chartList = [
     "line",

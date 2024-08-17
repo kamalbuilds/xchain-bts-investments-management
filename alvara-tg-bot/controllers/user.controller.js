@@ -39,7 +39,6 @@ const usersBTSData = async (page, limit, address) => {
 
   const res = await fetch(url);
   const response = await res.json();
-  console.log("Response >>", response);
 
   const { users } = response;
 

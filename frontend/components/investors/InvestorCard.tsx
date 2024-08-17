@@ -1,6 +1,8 @@
 import * as React from "react"
 import Image from "next/image"
 import { Bitcoin, CircleDollarSign } from "lucide-react"
+import { FaBucket } from "react-icons/fa6"
+import { MdAccessTime } from "react-icons/md"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -11,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { FaBucket } from "react-icons/fa6";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
@@ -33,7 +34,7 @@ const InvestorCard = ({
   const borderClass = selected ? "border-4" : "border"
   return (
     <Card
-      className={`w-[350px] cursor-pointer ${borderClass} 
+      className={`w-[500px] cursor-pointer ${borderClass} 
       ${title === "Conservative" && selected && "border-green-600"}
        ${title === "Moderate" && selected && "border-yellow-600"}
        ${title === "Degen" && selected && "border-red-600"}
@@ -65,23 +66,27 @@ const InvestorCard = ({
             <div className="ml-4 space-y-1">
               <div className="flex  items-center gap-1">
                 <CircleDollarSign />
-
-                <p className="text-lg font-medium leading-none">Volume</p>
+                <p className="text-lg font-medium leading-none">TVL</p>
               </div>
 
               <p className="text-muted-foreground text-sm"></p>
             </div>
-            <div className="ml-auto font-medium">${parseFloat(volume).toLocaleString()}</div>
+            <div className="ml-auto font-medium">
+              ${parseFloat(volume).toLocaleString()}
+            </div>
           </div>
           <div className="flex items-center">
             <div className="ml-4 space-y-1">
               <div className="flex  items-center gap-1">
-                <Bitcoin />
-                <p className="text-lg font-medium leading-none">Profit</p>
+                <MdAccessTime size={24} />
+                <p className="text-lg font-medium leading-none">24h Volume</p>
               </div>
               <p className="text-muted-foreground text-sm"></p>
             </div>
-            <div className="ml-auto font-medium"> {profit}</div>
+            <div className="ml-auto font-medium">
+              {" "}
+              ${parseFloat(profit).toLocaleString()}
+            </div>
           </div>
         </div>
       </CardContent>

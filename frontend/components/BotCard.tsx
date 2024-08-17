@@ -51,7 +51,6 @@ export const BotCard: React.FC<BotCardProps> = ({
   const handleCardClick = (btsArray, index) => {
     const btsIds = btsArray.map((item) => item._id)
     const url = `/strategy/${index}?btsData=${JSON.stringify(btsIds)}`
-    console.log("URL", url)
     router.push(url)
   }
 
@@ -98,7 +97,8 @@ export const BotCard: React.FC<BotCardProps> = ({
                                 {bts.name}
                               </h4>
                               <p className="text-muted-foreground text-sm">
-                                TVL: ${parseFloat(bts.tvl.usd)?.toLocaleString()}
+                                TVL: $
+                                {parseFloat(bts.tvl.usd)?.toLocaleString()}
                               </p>
                             </div>
                             <div className="flex flex-col">
@@ -106,12 +106,14 @@ export const BotCard: React.FC<BotCardProps> = ({
                                 ${bts.price.usd.toLocaleString()}
                               </p>
                               <p
-                                className={`text-end text-sm ${bts["24hourPriceChange"] < 0
-                                  ? "text-red-600"
-                                  : "text-green-600"
-                                  }`}
+                                className={`text-end text-sm ${
+                                  bts["24hourPriceChange"] < 0
+                                    ? "text-red-600"
+                                    : "text-green-600"
+                                }`}
                               >
-                                &#40; {bts["24hourPriceChange"].toLocaleString()}%
+                                &#40;{" "}
+                                {bts["24hourPriceChange"].toLocaleString()}%
                                 &#41;
                               </p>
                             </div>{" "}

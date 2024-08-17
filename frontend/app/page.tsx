@@ -111,14 +111,25 @@ export default function Home() {
   }
 
   const fetchTotalVolumeBasedOnBTS = (arr, category) => {
-    const filtered = arr.filter(item => item.category === category);
-    const totalVolume = filtered.reduce((sum, item) => sum + item.tvl.usd, 0);
-    const averageVolume = filtered.length > 0 ? totalVolume / filtered.length : 0;
+    const filtered = arr.filter((item) => item.category === category)
+    const totalVolume = filtered.reduce((sum, item) => sum + item.tvl.usd, 0)
+    const averageVolume =
+      filtered.length > 0 ? totalVolume / filtered.length : 0
 
-    return averageVolume;
+    return averageVolume
   }
 
+  const fetchLast24HourVolumeChange = (arr, category) => {
+    const filtered = arr.filter((item) => item.category === category)
+    const totalVolume = filtered.reduce(
+      (sum, item) => sum + item["24hourVolume"],
+      0
+    )
+    const averageVolume =
+      filtered.length > 0 ? totalVolume / filtered.length : 0
 
+    return averageVolume
+  }
 
   return (
     <div className="flex flex-col gap-8 px-20 py-8">
@@ -132,8 +143,13 @@ export default function Home() {
       <div className="flex flex-col gap-12">
         <div className="flex flex-row justify-center gap-12 border-[#DCD2C7]">
           {["Conservative", "Moderate", "Degen"].map((title, index) => {
-            const averageVolumeBasedOnCategory = fetchTotalVolumeBasedOnBTS(groupedBTS, title)
-            const btses = groupedBTS.filter(item => item.category === title);
+            const averageVolumeBasedOnCategory = fetchTotalVolumeBasedOnBTS(
+              groupedBTS,
+              title
+            )
+            const btses = groupedBTS.filter((item) => item.category === title)
+
+            const profit = fetchLast24HourVolumeChange(groupedBTS, title)
             return (
               <InvestorCard
                 key={index}
@@ -141,7 +157,7 @@ export default function Home() {
                 title={title}
                 btsesNumber={btses?.length}
                 volume={averageVolumeBasedOnCategory}
-                profit="$2011.08"
+                profit={profit}
                 handleCardSelect={handleCardSelect}
               />
             )
