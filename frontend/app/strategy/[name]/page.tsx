@@ -192,7 +192,7 @@ const StrategyPage = ({ strategy, bts }) => {
         </p>
       </div>
       <div>
-        <div className="mb-4 ml-12 grid items-center justify-end gap-1.5">
+        <div className="mb-4 ml-12 flex flex-row items-center justify-end gap-1.5">
           <p className="max-w-[700px] text-lg text-muted-foreground">
             Enter Amount (in ETH)
           </p>
@@ -250,7 +250,7 @@ const StrategyPage = ({ strategy, bts }) => {
                     <p className="capitalize">{bts.symbol}</p>
                   </TableCell>
                   <TableCell>
-                    <p className="">${bts.price.usd.toFixed(2)}</p>
+                    <p className="">${bts.price.usd.toLocaleString()}</p>
                   </TableCell>
                   <TableCell>
                     <p
@@ -259,7 +259,7 @@ const StrategyPage = ({ strategy, bts }) => {
                         : "text-green-600"
                         }`}
                     >
-                      &#40;{bts["24hourPriceChange"].toFixed(2)}%&#41;
+                      &#40;{bts["24hourPriceChange"].toLocaleString()}%&#41;
                     </p>
                   </TableCell>
                   <TableCell className="text-right">
@@ -280,7 +280,11 @@ const StrategyPage = ({ strategy, bts }) => {
           </TableBody>
         </Table>
       </div>
-      <Button disabled={loading} onClick={handleInvest}>Invest</Button>
+      <div className="flex justify-center pt-4">
+        <div>
+          <Button size='lg' className="w-[250px]" disabled={loading} onClick={handleInvest}>Invest</Button>
+        </div>
+      </div>
     </div>
   )
 }

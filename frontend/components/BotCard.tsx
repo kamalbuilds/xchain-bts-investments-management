@@ -36,8 +36,6 @@ export const BotCard: React.FC<BotCardProps> = ({
   btsData,
   category,
 }) => {
-  console.log("btsdata", btsData)
-
   const chunkArray = (array, size) => {
     const result = []
     for (let i = 0; i < array.length; i += size) {
@@ -48,12 +46,9 @@ export const BotCard: React.FC<BotCardProps> = ({
 
   const groupedBtsData = chunkArray(btsData, 4)
 
-  console.log("groupedBtsData", groupedBtsData)
-
   const router = useRouter()
 
   const handleCardClick = (btsArray, index) => {
-    console.log("Bts Array", btsArray)
     const btsIds = btsArray.map((item) => item._id)
     const url = `/strategy/${index}?btsData=${JSON.stringify(btsIds)}`
     console.log("URL", url)
@@ -64,16 +59,12 @@ export const BotCard: React.FC<BotCardProps> = ({
     <div className="">
       <div className="flex flex-row justify-between">
         <h3 className="text-[20px] font-[700]">{title}</h3>
-        <Link href={`/bts/${category}`} legacyBehavior>
-          <a className="text-[14px] font-[700] text-blue-500">See All</a>
-        </Link>
       </div>
       <p className="text-[12px] font-[700] text-[#C3C3C3]">
         The newest tokens in the market
       </p>
       <div className="mt-[26px] flex flex-wrap gap-12">
         {chunkArray(btsData, 4).map((btsArray, index) => {
-          console.log("btsArray", btsArray)
           return (
             <Card className="min-w-[450px]">
               <CardHeader>
@@ -90,7 +81,6 @@ export const BotCard: React.FC<BotCardProps> = ({
               <CardContent>
                 <div className="flex flex-col gap-4">
                   {btsArray.map((bts) => {
-                    console.log("bts", bts)
                     return (
                       <>
                         <div className="flex items-center gap-2">
@@ -107,21 +97,21 @@ export const BotCard: React.FC<BotCardProps> = ({
                               <h4 className="scroll-m-20 text-xl font-semibold capitalize tracking-tight">
                                 {bts.name}
                               </h4>
-                              <p className="text-sm text-muted-foreground">
-                                TVL: ${parseFloat(bts.tvl.usd)?.toFixed(2)}
+                              <p className="text-muted-foreground text-sm">
+                                TVL: ${parseFloat(bts.tvl.usd)?.toLocaleString()}
                               </p>
                             </div>
                             <div className="flex flex-col">
                               <p className="text-end">
-                                ${bts.price.usd.toFixed(2)}
+                                ${bts.price.usd.toLocaleString()}
                               </p>
                               <p
                                 className={`text-end text-sm ${bts["24hourPriceChange"] < 0
-                                    ? "text-red-600"
-                                    : "text-green-600"
+                                  ? "text-red-600"
+                                  : "text-green-600"
                                   }`}
                               >
-                                &#40; {bts["24hourPriceChange"].toFixed(2)}%
+                                &#40; {bts["24hourPriceChange"].toLocaleString()}%
                                 &#41;
                               </p>
                             </div>{" "}

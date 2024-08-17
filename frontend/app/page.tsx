@@ -30,7 +30,6 @@ export default function Home() {
   const [selectedCard, setSelectedCard] = useState<string>("")
   const [groupedBTS, setGroupedBTS] = useState<CategorizedBTS[]>([])
 
-  console.log("groupedBTS:", groupedBTS)
   useEffect(() => {
     const fetchBTSData = async () => {
       try {
@@ -111,6 +110,16 @@ export default function Home() {
     })
   }
 
+  const fetchTotalVolumeBasedOnBTS = (arr, category) => {
+    const filtered = arr.filter(item => item.category === category);
+    const totalVolume = filtered.reduce((sum, item) => sum + item.tvl.usd, 0);
+    const averageVolume = filtered.length > 0 ? totalVolume / filtered.length : 0;
+
+    return averageVolume;
+  }
+
+
+
   return (
     <div className="flex flex-col gap-8 px-20 py-8">
       <div>
@@ -122,16 +131,21 @@ export default function Home() {
 
       <div className="flex flex-col gap-12">
         <div className="flex flex-row justify-center gap-12 border-[#DCD2C7]">
-          {["CONSERVATIVE", "MODERATE", "DEGEN"].map((title, index) => (
-            <InvestorCard
-              key={index}
-              selected={selectedCard === title}
-              title={title}
-              volume="1,690,850"
-              profit="$2011.08"
-              handleCardSelect={handleCardSelect}
-            />
-          ))}
+          {["Conservative", "Moderate", "Degen"].map((title, index) => {
+            const averageVolumeBasedOnCategory = fetchTotalVolumeBasedOnBTS(groupedBTS, title)
+            const btses = groupedBTS.filter(item => item.category === title);
+            return (
+              <InvestorCard
+                key={index}
+                selected={selectedCard === title}
+                title={title}
+                btsesNumber={btses?.length}
+                volume={averageVolumeBasedOnCategory}
+                profit="$2011.08"
+                handleCardSelect={handleCardSelect}
+              />
+            )
+          })}
         </div>
 
         <Separator />
