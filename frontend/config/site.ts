@@ -2,12 +2,8 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "Alvara Xchain Investments",
-  description: "Investment Strategies for the Future",
+  description: "Investment Strategies for the Future powered by AI",
   mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
     {
       title: "Charts",
       href: "/charts",
@@ -17,13 +13,11 @@ export const siteConfig = {
       href: "/portfolio",
     },
     {
-      title: "My Investment Bots",
-      href: "/mybots",
+      title: "Create an AI Investment Bot",
+      href: "/createaibot",
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "https://x.com/0xkamal7",
   },
 }
