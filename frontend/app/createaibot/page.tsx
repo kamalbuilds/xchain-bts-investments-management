@@ -13,7 +13,11 @@ import { useParams } from "next/navigation";
 
 export default function MyBots() {
 
-  const params = useParams()
+  const params = useParams();
+
+  const [charttype, setChartType] = useState("candlestick");
+
+
 
   const { id, first_name, last_name, username, photo_url, auth_date, hash } = params;
 
@@ -50,10 +54,11 @@ export default function MyBots() {
   }, [selectedCurrency]);
 
 
+
   // show the chart via candlestick
   const options = {
     chart: {
-      type: "candlestick",
+      type: charttype,
       height: 350,
     },
     xaxis: {
@@ -64,6 +69,9 @@ export default function MyBots() {
         enabled: true,
       },
     },
+    theme: {
+      mode: "light",
+    }
   };
 
   return (
@@ -88,7 +96,7 @@ export default function MyBots() {
               <TelegramLoginButton
                 botName="alvara_xchain_investment_bot"
                 dataOnauth={(user) => console.log(user)}
-                dataAuthUrl="https://xchain-alvara-investments.vercel.app/myaibot"
+                // dataAuthUrl="https://xchain-alvara-investments.vercel.app/myaibot"
                 cornerRadius={5}
               />
             ) : (

@@ -50,10 +50,10 @@ const InvestmentPanel = () => {
         <div className="flex flex-col ">
           <div className="border-b-[0.25px] border-[#DCD2C7] p-[20px] pt-[5px]">
             <div className="h-[240px] flex flex-row justify-center">
-              <img src="/images/moderate-investor.png" alt="moderate investor" />
+              <img src="/moderate-investor.png" alt="moderate investor" />
             </div>
             <p className="text-[28px] font-[700] text-primary">
-              Custom AI Bot
+              Customise the AI Bot
             </p>
           </div>
           <div className="border-b-[0.25px] border-[#DCD2C7] p-[20px]">
