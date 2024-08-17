@@ -45,18 +45,18 @@ const InvestmentPanel = () => {
   ];
   return (
     <div className="z-50">
-      <div className="flex flex-col w-[393px] border border-[#DCD2C7]">
+      <div className="flex flex-col w-[393px]">
         <div className="flex flex-row justify-end py-[11px] px-[12px]"></div>
         <div className="flex flex-col ">
-          <div className="border-b-[0.25px] border-[#DCD2C7] p-[20px] pt-[5px]">
+          <div className="border-b-[0.25px] p-[20px] pt-[5px]">
             <div className="h-[240px] flex flex-row justify-center">
               <img src="/moderate-investor.png" alt="moderate investor" />
             </div>
             <p className="text-[28px] font-[700] text-primary">
-              Customise the AI Bot
+              Customise your AI Bot
             </p>
           </div>
-          <div className="border-b-[0.25px] border-[#DCD2C7] p-[20px]">
+          <div className="border-b-[0.25px] p-[20px]">
             <div className="flex flex-row  mt-[24px] space-x-[50px]">
               <div className="flex flex-col">
                 <span className="text-[14px] font-[500] text-grey">
@@ -96,7 +96,7 @@ const InvestmentPanel = () => {
               </div>
             </div>
           </div>
-          <div className="border-b-[0.25px] border-[#DCD2C7] p-[20px]">
+          <div className="border-b-[0.25px] p-[20px]">
             <div className="flex flex-row mt-[24px] space-x-[100px]">
               <div className="flex flex-col">
                 <span className="text-[14px] font-[500] text-grey">
@@ -114,7 +114,7 @@ const InvestmentPanel = () => {
               </div>
             </div>
           </div>
-          <div className="border-b-[0.25px] border-[#DCD2C7] p-[20px]">
+          <div className="border-b-[0.25px] p-[20px]">
             <p className="text-[20px] font-[500] text-primary">
               Portfolio Forecast
             </p>

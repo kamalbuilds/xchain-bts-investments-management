@@ -1,59 +1,72 @@
 // @ts-nocheck
-"use client";
+"use client"
 
-import React, { useRef, useState, useEffect } from "react";
-import { useRouter, NextRouter } from "next/router";
-import axios from "axios";
-import dynamic from "next/dynamic";
-const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
-import TelegramLoginButton from "telegram-login-button";
-import InvestmentPanel from "../../components/Layout/InvestmentPanel";
-import sendTelegramMessage from "../../actions/welcome";
-import { useParams } from "next/navigation";
+import React, { useEffect, useMemo, useRef, useState } from "react"
+import dynamic from "next/dynamic"
+import { useParams } from "next/navigation"
+import { NextRouter, useRouter } from "next/router"
+import axios from "axios"
+import TelegramLoginButton from "telegram-login-button"
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
+
+import sendTelegramMessage from "../../actions/welcome"
+import InvestmentPanel from "../../components/Layout/InvestmentPanel"
+
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false })
 
 export default function MyBots() {
+  const params = useParams()
 
-  const params = useParams();
+  const [charttype, setChartType] = useState("candlestick")
 
-  const [charttype, setChartType] = useState("candlestick");
+  const { id, first_name, last_name, username, photo_url, auth_date, hash } =
+    params
 
+  const isLoggedIn = Boolean(id)
 
+  console.log(id)
 
-  const { id, first_name, last_name, username, photo_url, auth_date, hash } = params;
-
-  const isLoggedIn = Boolean(id);
-
-  console.log(id);
-
-  const [series, setSeries] = useState([]);
-  const [selectedCurrency, setSelectedCurrency] = useState("ethereum");
+  const [series, setSeries] = useState([])
+  const [selectedCurrency, setSelectedCurrency] = useState("ethereum")
 
   useEffect(() => {
     if (isLoggedIn && id) {
-      const welcomeMessage = "Welcome to the XChain-BTS-Investment Bot!";
+      const welcomeMessage = "Welcome to the XChain-BTS-Investment Bot!"
       sendTelegramMessage(id, welcomeMessage)
         .then((response: any) => console.log("Message sent:", response))
-        .catch((error: any) => console.error("Error:", error));
+        .catch((error: any) => console.error("Error:", error))
     }
-  }, [id, isLoggedIn]);
+  }, [id, isLoggedIn])
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("Selected Currency", selectedCurrency)
+
       // fetch the data from the coingecko api
       const response = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${selectedCurrency}/ohlc?vs_currency=usd&days=14`
-      );
+      )
       const formattedData = response.data.map((x: any) => ({
         x: new Date(x[0]),
         y: [x[1], x[2], x[3], x[4]],
-      }));
-      setSeries([{ data: formattedData }]);
-    };
+      }))
+      console.log("Formatted data ", formattedData)
 
-    fetchData();
-  }, [selectedCurrency]);
+      setSeries([{ data: formattedData }])
+    }
 
-
+    fetchData()
+  }, [selectedCurrency])
 
   // show the chart via candlestick
   const options = {
@@ -71,27 +84,70 @@ export default function MyBots() {
     },
     theme: {
       mode: "light",
-    }
-  };
+    },
+  }
+
+  console.log("Options >>", options)
+
+  const chartList = [
+    "line",
+    "area",
+    "bar",
+    "candlestick",
+    "rangeBar",
+    "rangeArea",
+  ]
 
   return (
     <div className="flex flex-row">
       <InvestmentPanel />
-      <div className="w-full flex-shrink-0 ">
-        <div className="flex flex-row h-[70px] w-full border border-[#DCD2C7]">
-          <div className="w-[160px] px-[40px] py-[21px] items-center border-r">
-            <select
+      {/* <Separator orientation="vertical" className="w-[2px] h-screen" /> */}
+      <div className="w-full border-l-2 px-4">
+        <div className="flex flex-row gap-4 py-4">
+          <div className="items-center border-r">
+            <Select
               value={selectedCurrency}
-              onChange={(e) => setSelectedCurrency(e.target.value)}
-              className="outline-none font-[700] text-grey text-[20px]"
+              onValueChange={(value) => {
+                setSelectedCurrency(value)
+              }}
             >
-              <option value="ethereum">ETH</option>
-              <option value="usd-coin">USDC</option>
-              <option value="tether">USDT</option>
-              <option value="chainlink">LINK</option>
-            </select>
+              <SelectTrigger className="w-[280px]">
+                <SelectValue placeholder="Select Token" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Tokens</SelectLabel>
+                  <SelectItem value="ethereum">ETH</SelectItem>
+                  <SelectItem value="usd-coin">USDC</SelectItem>
+                  <SelectItem value="tether">USDT</SelectItem>
+                  <SelectItem value="chainlink">LINK</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
-          <div className="absolute top-[125px] right-[30px]">
+          <div>
+            <Select
+              value={charttype}
+              onValueChange={(value) => {
+                setChartType(value)
+              }}
+            >
+              <SelectTrigger className="w-[280px]">
+                <SelectValue placeholder="Select Chart Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Chart Types</SelectLabel>
+                  {chartList.map((chart) => (
+                    <SelectItem value={chart}>
+                      <p className="text-sm capitalize">{chart}</p>
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="">
             {!isLoggedIn ? (
               <TelegramLoginButton
                 botName="alvara_xchain_investment_bot"
@@ -100,13 +156,13 @@ export default function MyBots() {
                 cornerRadius={5}
               />
             ) : (
-              <div className="flex flex-row gap-[5px] px-[10px] items-center rounded-[5px] bg-[#54A9EA] w-[160px] h-[40px]">
+              <div className="flex h-[40px] w-[160px] flex-row items-center gap-[5px] rounded-[5px] bg-[#54A9EA] px-[10px]">
                 <img
                   className="h-[30px] w-[30px] rounded-full"
                   src={decodeURIComponent(photo_url)}
                   alt=""
                 />
-                <span className="text-white font-[16px]">
+                <span className="font-[16px] text-white">
                   {first_name} {last_name}
                 </span>
               </div>
@@ -118,7 +174,7 @@ export default function MyBots() {
             <ApexChart
               options={options}
               series={series}
-              type="candlestick"
+              type={charttype}
               height={700}
               width={1000}
             />
@@ -126,5 +182,5 @@ export default function MyBots() {
         </div>
       </div>
     </div>
-  );
+  )
 }
