@@ -116,7 +116,7 @@ const CustomiseForm = () => {
       {strategyInput.showSuggestions && <AIAnalysis />}
 
       <div>
-        <Link href="/mybots">
+        <Link href="/createaibot">
           <Button onClick={handleConfirm}>Confirm</Button>
         </Link>
       </div>
