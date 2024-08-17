@@ -108,7 +108,7 @@ export const BotCard: React.FC<BotCardProps> = ({
                                 {bts.name}
                               </h4>
                               <p className="text-sm text-muted-foreground">
-                                TVL: {parseFloat(bts.total_supply)?.toFixed(2)}
+                                TVL: ${parseFloat(bts.tvl.usd)?.toFixed(2)}
                               </p>
                             </div>
                             <div className="flex flex-col">
@@ -116,11 +116,10 @@ export const BotCard: React.FC<BotCardProps> = ({
                                 ${bts.price.usd.toFixed(2)}
                               </p>
                               <p
-                                className={`text-end text-sm text-muted-foreground ${
-                                  bts["24hourPriceChange"] < 0
+                                className={`text-end text-sm ${bts["24hourPriceChange"] < 0
                                     ? "text-red-600"
                                     : "text-green-600"
-                                }`}
+                                  }`}
                               >
                                 &#40; {bts["24hourPriceChange"].toFixed(2)}%
                                 &#41;
