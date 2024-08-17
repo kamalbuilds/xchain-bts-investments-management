@@ -103,6 +103,43 @@ bot.command("contributetobts", async (ctx) => {
   }
 });
 
+bot.command("withdraw", async (ctx) => {
+  if (!ctx.session.wallet) {
+      return ctx.reply("Please import your wallet first.");
+  }
+
+  const messageText = ctx.message.text;
+  const match = messageText.match(/\/withdraw\s+(\w+)\s+(\d+(\.\d+)?)/); // Regex to match BTS address and amount
+
+  if (!match) {
+      return ctx.reply("Please provide a valid BTS address and amount. Usage: /withdraw <bts_address> <amount>");
+  }
+
+  const btsAddress = match[1]; // Extract the BTS address
+  const amount = match[2]; // Extract the amount
+  const amountToWithdraw = ethers.utils.parseUnits(amount, 18); // Amount of WETH to withdraw
+
+  const privateKey = decrypt(ctx.session.wallet.privateKey);
+  const wallet = new ethers.Wallet(privateKey, provider);
+
+  // Create a contract instance for the LP contract
+  const btsPairContract = new ethers.Contract(btsAddress, btsabi, wallet);
+
+  try {
+      // Call the approve function on the LP contract
+      const approveTx = await btsPairContract.approve(btsAddress, amountToWithdraw, { gasLimit: 200000 });
+      await approveTx.wait(); // Wait for the approval transaction to be mined
+
+      // Now call the withdraw function on the contract
+      const withdrawTx = await btsPairContract.withdraw(amountToWithdraw, { gasLimit: 200000 });
+      await withdrawTx.wait(); // Wait for the withdrawal transaction to be mined
+
+      ctx.reply(`Successfully withdrew ${amount} WETH from the BTS at ${btsAddress}. Transaction hash: ${withdrawTx.hash}`);
+  } catch (error) {
+      ctx.reply(`Error: ${error.message}`);
+  }
+});
+
 bot.action("import-wallet", (ctx) => {
   ctx.scene.enter(importWalletScene);
 });

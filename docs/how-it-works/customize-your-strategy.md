@@ -1,11 +1,21 @@
-# Customize your AI Bot
+# Customization Options
 
-We have a powerful web based editor that allows you to seamlessly create, update, and enhance your AI BOT.
+## Customizing Your Portfolio
+The platform offers extensive customization options for users who want to tailor their investment strategies.
 
-<figure><img src="https://gitbookio.github.io/onboarding-template-images/editor-hero.png" alt=""><figcaption></figcaption></figure>
+### Custom Investment Allocations
+Users can allocate specific percentages of their total investment to different BTS tokens within their portfolio.
 
-### Writing content
+- **Investment Sliders**: Easily adjust the allocation of funds across various tokens using intuitive sliders.
+- **Real-Time Feedback**: The platform provides real-time feedback on the impact of changes, helping users make informed decisions.
 
-GitBook offers a range of block types for you to add to your content inline — from simple text and tables, to code blocks and more. These elements will make your pages more useful to readers, and offer extra information and context.
+### Strategy Personalization
+Users can personalize their strategies based on their financial goals and risk tolerance.
 
-Either start typing below, or press `/` to see a list of the blocks you can insert into your page.
+- **Create Custom Strategies**: Users can create their own investment strategies, selecting the tokens and allocation percentages that best suit their needs.
+- **AI Suggestions**: The platform's AI engine offers suggestions for optimizing the user's strategy based on market conditions and portfolio performance.
+
+## Example Usage
+- **Scenario**: A user wants to increase their exposure to a new trending BTS token while maintaining a balanced portfolio.
+- **Action**: The user creates a custom strategy, allocating a higher percentage to the trending token while adjusting other allocations to maintain balance.
+- **Outcome**: The user’s portfolio is automatically adjusted to reflect the new strategy, with ongoing AI-driven insights provided to ensure optimal performance.
