@@ -1,6 +1,6 @@
 # Telegram Bot Overview
 
-The XChain-BTS-Investment Telegram bot is a crucial component of the project, designed to facilitate user interaction with the BTS-ERC7621 investments. The bot allows users to manage their wallets, contribute to BTS (Basket Token Services), and receive updates about trending tokens, all through a simple and intuitive interface.
+The XChain-BTS-Investment Telegram bot is a crucial component of the project, designed to facilitate user interaction with the BTS-ERC7621 investments. The bot allows users to manage their wallets, contribute to BTS (Basket Token Standard), and receive updates about trending tokens, all through a simple and intuitive interface.
 
 ## Key Features
 - **Wallet Management**: Import, view, and manage cryptocurrency wallets.

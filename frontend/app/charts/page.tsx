@@ -26,6 +26,10 @@ import {
 const ChartsPage = () => {
   const [sevenDaysPriceData, setSevenDaysPriceData] = useState(null)
 
+  useEffect(() => {
+    handleData()
+  }, []);
+
   const handleData = async () => {
     const response = await fetch(
       "https://testnetapi.alvara.xyz/bts/manager?id=668a94b70e01b016cbc15ca2"
@@ -54,8 +58,7 @@ const ChartsPage = () => {
 
   return (
     <div>
-      hello world
-      <Button onClick={handleData}> Get Data </Button>
+      <h2>Alva Token Price Chart</h2>
       {sevenDaysPriceData && (
         <div>
           <ChartContainer

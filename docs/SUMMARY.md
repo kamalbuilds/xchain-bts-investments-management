@@ -23,16 +23,8 @@
 
 ## How it works
 
-* [Investment Categories](how-it-works/investment-categories.md)
-* [Interactive blocks](how-it-works/interactive-blocks.md)
-* [Alvara Investment TG Bot](how-it-works/markdown.md)
-* [Integrations](how-it-works/integrations.md)
-* [Editor](how-it-works/editor.md)
-* [OpenAPI](how-it-works/openapi.md)
-
-* [How It Works](how-it-works/overview.md)
-  * [Investment Strategies](how-it-works/investment-strategies.md)
-  * [Portfolio Management](how-it-works/portfolio-management.md)
-  * [Customization Options](how-it-works/customization.md)
-  * [Interactive User Experience](how-it-works/user-experience.md)
-  * [Automated Transactions](how-it-works/automated-transactions.md)
+* [Overview](how-it-works/overview.md)
+* [Investment Strategies](how-it-works/investment-strategies.md)
+* [Portfolio Management](how-it-works/portfolio-management.md)
+* [Customization Options](how-it-works/customization.md)
+* [Automated Transactions](how-it-works/automated-transactions.md)

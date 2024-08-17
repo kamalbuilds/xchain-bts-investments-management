@@ -50,7 +50,7 @@ const SideBar = () => {
     <div className="flex flex-col ">
       <div className="flex flex-row justify-end px-[12px] py-[11px]">
         <span className="flex h-[28px] w-[63px] items-center justify-center rounded-[6px] bg-accent text-[20px] font-[500] text-primary">
-          3M
+          🔥
         </span>
       </div>
       <div className="flex flex-col ">

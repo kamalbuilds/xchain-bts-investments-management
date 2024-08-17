@@ -1,192 +1,267 @@
-// @ts-nocheck
-"use client"
-
-import React, { useEffect, useState } from "react"
+"use client";
 import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
-import { BASE_URL } from "@/config/address"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { BotCard } from "@/components/BotCard"
-
-import sendTelegramMessage from "../actions/welcome"
-import { InvestorCard } from "../components/investors/InvestorCard"
-
-type BTSDataType = {
-  tvl: { usd: string }
-  all_time_performance: number
-  "24hourVolume": number
-  "24hourPriceChange": number
-  amount: string
-  total_supply: string
-}
-
-type CategorizedBTS = BTSDataType & {
-  score: number
-  category: string
-}
-
-export default function Home() {
-  const [selectedCard, setSelectedCard] = useState<string>("")
-  const [groupedBTS, setGroupedBTS] = useState<CategorizedBTS[]>([])
-
-  useEffect(() => {
-    const fetchBTSData = async () => {
-      try {
-        const url = `${BASE_URL}/bts/trending`
-        const res = await fetch(url)
-        const response = await res.json()
-        const { docs } = response
-
-        // Send only top 10 BTS token
-        const BTSData = docs
-
-        // for faster testing with only 10 BTS tokens
-        // const BTSData = docs.length > 10 ? docs.slice(0, 10) : docs
-
-        const categorizedBTS = categorizeBTS(BTSData)
-        setGroupedBTS(categorizedBTS)
-      } catch (error) {
-        console.error("Error fetching BTS data:", error)
-      }
-    }
-
-    fetchBTSData()
-  }, [])
-
-  const handleCardSelect = (cardTitle: string) => {
-    setSelectedCard(cardTitle)
-  }
-
-  const welcome = () => {
-    const welcomeMessage = "Welcome to AlvaraXChainInvestment !"
-    sendTelegramMessage("kamalthedev", welcomeMessage)
-      .then((response: any) => console.log("Message sent:", response))
-      .catch((error: any) => console.error("Error:", error))
-  }
-
-  function categorizeBTS(btsData: BTSDataType[]): CategorizedBTS[] {
-    const maxValues = {
-      tvl: Math.max(...btsData.map((bts) => parseFloat(bts.tvl.usd))),
-      performance: Math.max(...btsData.map((bts) => bts.all_time_performance)),
-      volume: Math.max(...btsData.map((bts) => bts["24hourVolume"])),
-      priceChange: Math.max(
-        ...btsData.map((bts) => Math.abs(bts["24hourPriceChange"]))
-      ),
-      amount: Math.max(...btsData.map((bts) => parseFloat(bts.amount))),
-      supply: Math.max(...btsData.map((bts) => parseFloat(bts.total_supply))),
-    }
-
-    return btsData.map((bts) => {
-      const normalizedTVL = parseFloat(bts.tvl.usd) / maxValues.tvl
-      const normalizedPerformance =
-        bts.all_time_performance / maxValues.performance
-      const normalizedVolume = bts["24hourVolume"] / maxValues.volume
-      const normalizedPriceChange =
-        1 - Math.abs(bts["24hourPriceChange"]) / maxValues.priceChange
-      const normalizedAmount = parseFloat(bts.amount) / maxValues.amount
-      const normalizedSupply = parseFloat(bts.total_supply) / maxValues.supply
-
-      const score =
-        0.3 * normalizedTVL +
-        0.2 * normalizedPerformance +
-        0.2 * normalizedVolume -
-        0.1 * normalizedPriceChange +
-        0.1 * normalizedAmount +
-        0.1 * normalizedSupply
-
-      let category = "Moderate"
-      if (score > 0.75) {
-        category = "Conservative"
-      } else if (score < 0.4) {
-        category = "Degen"
-      }
-
-      return {
-        ...bts,
-        score,
-        category,
-      }
-    })
-  }
-
-  const fetchTotalVolumeBasedOnBTS = (arr, category) => {
-    const filtered = arr.filter((item) => item.category === category)
-    const totalVolume = filtered.reduce((sum, item) => sum + item.tvl.usd, 0)
-    const averageVolume =
-      filtered.length > 0 ? totalVolume / filtered.length : 0
-
-    return averageVolume
-  }
-
-  const fetchLast24HourVolumeChange = (arr, category) => {
-    const filtered = arr.filter((item) => item.category === category)
-    const totalVolume = filtered.reduce(
-      (sum, item) => sum + item["24hourVolume"],
-      0
-    )
-    const averageVolume =
-      filtered.length > 0 ? totalVolume / filtered.length : 0
-
-    return averageVolume
-  }
-
+export default function Component() {
   return (
-    <div className="flex flex-col gap-8 px-20 py-8">
-      <div>
-        <h5 className="text-[24px] font-[700]">EXPLORE</h5>
-        <p className="text-[12px] font-[700] text-[#C3C3C3]">
-          Choose your investor type
-        </p>
-      </div>
-
-      <div className="flex flex-col gap-12">
-        <div className="flex flex-row justify-center gap-12 border-[#DCD2C7]">
-          {["Conservative", "Moderate", "Degen"].map((title, index) => {
-            const averageVolumeBasedOnCategory = fetchTotalVolumeBasedOnBTS(
-              groupedBTS,
-              title
-            )
-            const btses = groupedBTS.filter((item) => item.category === title)
-
-            const profit = fetchLast24HourVolumeChange(groupedBTS, title)
-            return (
-              <InvestorCard
-                key={index}
-                selected={selectedCard === title}
-                title={title}
-                btsesNumber={btses?.length}
-                volume={averageVolumeBasedOnCategory}
-                profit={profit}
-                handleCardSelect={handleCardSelect}
-              />
-            )
-          })}
-        </div>
-
-        <Separator />
-      </div>
-
-      {selectedCard && (
-        <>
-          <BotCard
-            title={selectedCard}
-            key={selectedCard}
-            btsData={groupedBTS.filter(
-              (bts) => bts.category.toLowerCase() === selectedCard.toLowerCase()
-            )}
-            category={selectedCard.toLowerCase()}
-          />
-
-          <Link href="/customise">
-            <div className=" border-primary flex h-[238px] w-[393px] cursor-pointer flex-col items-center justify-center rounded-[8px] border p-[21px] py-[15px]">
-              <h2 className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-                Customise your investment by choosing own set % of tokens
-              </h2>
+    <div className="flex flex-col min-h-[100dvh]">
+      <main className="flex-1">
+        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+          <div className="container px-4 md:px-6">
+            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+              <div className="flex flex-col justify-center space-y-4">
+                <div className="space-y-2">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                    Unlock the Power of Cross-Chain Investing
+                  </h1>
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                    Seamlessly invest across multiple blockchains with our advanced investment management platform.
+                  </p>
+                  <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                    <Link
+                      href="/getstarted"
+                      className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      prefetch={false}
+                    >
+                      Get Started
+                    </Link>
+                    <Link
+                      href="https://alvaraxchaininvestment.gitbook.io/alvaraxchaininvestment"
+                      className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                      prefetch={false}
+                      target="_blank"
+                    >
+                      Learn More
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              <Card>
+                <CardContent className="grid gap-6">
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Seamless Cross-Chain Investments</h3>
+                    <p className="text-muted-foreground">
+                      Easily invest in a wide range of cryptocurrencies and tokens across multiple blockchains, all from
+                      a single platform.
+                    </p>
+                  </div>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Automated Portfolio Management</h3>
+                    <p className="text-muted-foreground">
+                      Let our AI-powered strategies handle the heavy lifting of portfolio rebalancing and optimization,
+                      freeing you up to focus on other aspects of your investment journey.
+                    </p>
+                  </div>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Advanced Analytics and Reporting</h3>
+                    <p className="text-muted-foreground">
+                      Gain deep insights into your investment performance with our comprehensive analytics and reporting
+                      tools, accessible through our Telegram bot.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </Link>
-        </>
-      )}
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Key Features</div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Revolutionize Your Investment Strategy
+                </h2>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Our platform offers a suite of advanced features to help you maximize your investment returns across
+                  multiple blockchains.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+              <img
+                src="/placeholder.svg"
+                width="550"
+                height="310"
+                alt="Features"
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
+              />
+              <div className="flex flex-col justify-center space-y-4">
+                <div className="grid gap-1">
+                  <h3 className="text-xl font-bold">Seamless Cross-Chain Investments</h3>
+                  <p className="text-muted-foreground">
+                    Easily invest in a wide range of cryptocurrencies and tokens across multiple blockchains, all from a
+                    single platform.
+                  </p>
+                </div>
+                <div className="grid gap-1">
+                  <h3 className="text-xl font-bold">Automated Portfolio Management</h3>
+                  <p className="text-muted-foreground">
+                    Let our AI-powered strategies handle the heavy lifting of portfolio rebalancing and optimization,
+                    freeing you up to focus on other aspects of your investment journey.
+                  </p>
+                </div>
+                <div className="grid gap-1">
+                  <h3 className="text-xl font-bold">Advanced Analytics and Reporting</h3>
+                  <p className="text-muted-foreground">
+                    Gain deep insights into your investment performance with our comprehensive analytics and reporting
+                    tools, accessible through our Telegram bot.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Personalized Strategies</div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Tailor Your Investment Journey</h2>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Our customizable AI bot can help you create personalized investment strategies based on your risk
+                  tolerance, financial goals, and market conditions.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+              <img
+                src="/placeholder.svg"
+                width="550"
+                height="310"
+                alt="Personalized Strategies"
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
+              />
+              <div className="flex flex-col justify-center space-y-4">
+                <div className="grid gap-1">
+                  <h3 className="text-xl font-bold">Customizable AI Bot</h3>
+                  <p className="text-muted-foreground">
+                    Leverage our advanced AI bot to create personalized investment strategies tailored to your unique
+                    financial goals and risk profile.
+                  </p>
+                </div>
+                <div className="grid gap-1">
+                  <h3 className="text-xl font-bold">Telegram Integration</h3>
+                  <p className="text-muted-foreground">
+                    Receive real-time updates, analytics, and portfolio management tools directly through our Telegram
+                    bot integration.
+                  </p>
+                </div>
+                <div className="grid gap-1">
+                  <h3 className="text-xl font-bold">Flexible Strategies</h3>
+                  <p className="text-muted-foreground">
+                    Easily adjust your investment strategies as your financial goals or market conditions change,
+                    ensuring your portfolio remains optimized.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Testimonials</div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">What Our Clients Say</h2>
+                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Hear from our satisfied clients about how our platform has transformed their investment strategies.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+              <div className="flex flex-col justify-center space-y-4">
+                <div className="grid gap-1">
+                  <div className="flex items-center gap-2">
+                    <Avatar>
+                      <AvatarImage src="/placeholder-user.jpg" />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="text-lg font-bold">John Doe</h4>
+                      <p className="text-sm text-muted-foreground">Crypto Investor</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    "BTS Investment has been a game-changer for my crypto\n portfolio. The seamless cross-chain
+                    capabilities and\n AI-powered strategies have helped me maximize my returns\n while minimizing
+                    risk."
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center space-y-4">
+                <div className="grid gap-1">
+                  <div className="flex items-center gap-2">
+                    <Avatar>
+                      <AvatarImage src="/placeholder-user.jpg" />
+                      <AvatarFallback>SA</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="text-lg font-bold">Sarah Anderson</h4>
+                      <p className="text-sm text-muted-foreground">Financial Analyst</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    "The advanced analytics and reporting tools provided by BTS\n Investment have been invaluable in
+                    helping me make\n data-driven decisions and optimize my portfolio. Highly\n recommended!"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className="bg-muted p-6 md:py-12 w-full">
+        <div className="container max-w-7xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 text-sm">
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Company</h3>
+            <Link href="#" prefetch={false}>
+              About Us
+            </Link>
+            <Link href="#" prefetch={false}>
+              Our Team
+            </Link>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Platform</h3>
+            <Link href="#" prefetch={false}>
+              Pricing
+            </Link>
+            <Link href="#" prefetch={false}>
+              Integrations
+            </Link>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Connect</h3>
+            <Link href="https://x.com/0xkamal7" prefetch={false}>
+              Twitter
+            </Link>
+            <Link href="#" prefetch={false}>
+              Discord
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
+  )
+}
+
+function BitcoinIcon(props : any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727" />
+    </svg>
   )
 }

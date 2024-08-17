@@ -1,3 +1,5 @@
+import { title } from "process"
+
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
@@ -5,7 +7,11 @@ export const siteConfig = {
   description: "Investment Strategies for the Future powered by AI",
   mainNav: [
     {
-      title: "Charts",
+      title : "Explore",
+      href: "/getstarted",
+    },
+    {
+      title: "Alva Chart",
       href: "/charts",
     },
     {

@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@chainlink/contracts/src/v0.8/KeeperCompatible.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-// swap tokens inside BTS automatically by the Bot to ensure that the Investment strategy is always profitable.
+// swap tokens inside BTS from USDC to ETH  automatically by the Bot to ensure that the Investment strategy is always profitable.
 contract AutomatedBotSwap is KeeperCompatibleInterface {
     IUniswapV2Router02 public uniswapRouter;
     address public tokenA;
