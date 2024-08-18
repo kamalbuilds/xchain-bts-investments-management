@@ -10,13 +10,14 @@
 ## Features we Provide
 
 * [Features](features/features.md)
+* [Investment Strategies](features-we-provide/investment-strategies.md)
 * [TGBot Sending Monitoring Updates](telegram-bot/monitoring-updates.md)
 * [AI Powered Portfolio Management](how-it-works/portfolio-management.md)
 
 ## How it works
 
 * [Overview](how-it-works/overview.md)
-* [Investment Strategies](how-it-works/investment-strategies.md)
+* [Architecture Diagram](how-it-works/architecture-diagram.md)
 * [Automated Transactions](how-it-works/automated-transactions.md)
 
 ## Telegram Bot
