@@ -247,7 +247,7 @@ const StrategyPage = ({ strategy, bts }) => {
           </TableBody>
         </Table>
       </div>
-      <div className="flex justify-center pt-4">
+      <div className="flex flex-col justify-center justify-self-center items-center pt-4">
         <div>
           <Button
             size="lg"
@@ -256,6 +256,16 @@ const StrategyPage = ({ strategy, bts }) => {
             onClick={handleInvest}
           >
             Invest
+          </Button>
+        </div>
+        <div className="my-6">
+          <Button
+            size="lg"
+            className="w-[250px]"
+            disabled={loading}
+            onClick={handleInvest}
+          >
+            Cross-Chain Invest
           </Button>
         </div>
       </div>

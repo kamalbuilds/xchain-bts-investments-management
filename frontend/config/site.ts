@@ -22,6 +22,10 @@ export const siteConfig = {
       title: "Create an AI Investment Bot",
       href: "/createaibot",
     },
+    {
+      title: "Bridge CrossChain",
+      href: "/bridge",
+    }
   ],
   links: {
     twitter: "https://x.com/0xkamal7",
