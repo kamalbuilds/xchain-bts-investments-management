@@ -11,18 +11,18 @@
 
 * [Features](features/features.md)
 * [TGBot Sending Monitoring Updates](telegram-bot/monitoring-updates.md)
-* [Portfolio Management](how-it-works/portfolio-management.md)
-
-## Telegram Bot
-
-* [Telegram Bot Overview](telegram-bot/overview.md)
-* [Bot Commands and Actions](telegram-bot/commands.md)
-* [Bot Workflow and User Interactions](telegram-bot/workflow.md)
-* [Monitoring Updates](telegram-bot/monitoring-updates.md)
-* [Deployment and Testing](telegram-bot/deployment-testing.md)
+* [AI Powered Portfolio Management](how-it-works/portfolio-management.md)
 
 ## How it works
 
 * [Overview](how-it-works/overview.md)
 * [Investment Strategies](how-it-works/investment-strategies.md)
 * [Automated Transactions](how-it-works/automated-transactions.md)
+
+## Telegram Bot
+
+* [Telegram Bot Overview](telegram-bot/overview.md)
+* [Bot Commands and Actions](telegram-bot/commands.md)
+* [Bot Workflow and User Interactions](telegram-bot/workflow.md)
+* [Alvara APIs](telegram-bot/alvara-apis.md)
+* [Deployment and Testing](telegram-bot/deployment-testing.md)

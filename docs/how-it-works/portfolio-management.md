@@ -1,4 +1,4 @@
-# Portfolio Management
+# AI Powered Portfolio Management
 
 ## Overview
 The Portfolio Management feature allows users to track and manage their investments in BTS tokens.
