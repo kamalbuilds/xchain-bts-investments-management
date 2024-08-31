@@ -5,7 +5,7 @@ const { Telegraf, Scenes, session } = require("telegraf");
 const { createCallBackBtn, decrypt } = require("./utils");
 const { importWalletScene, importWalletStep } = require("./scenes");
 const { ethers } = require("ethers");
-const { btsabi } = require("./abis/bts.js");
+const { btsabi } = require("./abis/bts.ts");
 
 require("dotenv").config();
 
@@ -67,6 +67,60 @@ bot.command("start", (ctx) => {
     },
   });
 });
+
+bot.command("checkstrategy", (ctx) => {
+  const keyboard = [
+    [
+      createCallBackBtn("Yes ✅", "change_yes"),
+      createCallBackBtn("No ❌", "change_no"),
+    ],
+  ];
+  ctx.reply("👋 Welcome to AlvaraXChainInvestmentBot 🤖! Let me check how our strategy is currently performing.", {
+    parse_mode: "HTML",
+  });
+  
+  setTimeout(() => {
+    ctx.reply(
+      `😔 <b>Important Update:</b>\n\nOur current BTS strategy is underperforming due to market conditions.\n\n<b>Suggestion:</b> Deploy a new strategy incorporating "Sentiment Analysis" to gain insights into market emotions and dynamics. This could help turn things around.`,
+      {
+        parse_mode: "HTML",
+        reply_markup: { inline_keyboard: keyboard },
+      }
+    );
+  }, 5000);
+
+  setTimeout(() => {
+    ctx.reply(
+      `📢 <b>New BTS Alert!</b> 📢\n\n🚀 <b>YoungT</b> BTS is now available in the market! [View details](https://testnet.alvara.xyz/#/bts/detail/6649e2e85b45d8996a728774)\n\n🔥 Don't miss out! Invest today to maximize your gains.`,
+      {
+        parse_mode: "HTML",
+      }
+    );
+  }, 15000);
+});
+
+bot.command("changestrategy", (ctx) => {
+  const keyboard = [
+    [
+      createCallBackBtn("Yes ✅", "change_yes"),
+      createCallBackBtn("No ❌", "change_no"),
+    ],
+  ];
+  ctx.reply(
+    `🚨 <b>Urgent Notice:</b> \n\nOur current strategy is not optimized, and we're experiencing losses. 😟\n\n<b>Suggestion:</b> Deploy a new strategy focused on "Sentiment Analysis" to improve our market position.`,
+    {
+      parse_mode: "HTML",
+      reply_markup: { inline_keyboard: keyboard },
+    }
+  );
+});
+
+bot.command("showforecast", (ctx) => {
+  const imageUrl = "https://i.ibb.co/jvjw8LY/Screenshot-2023-12-07-at-5-29-00-PM.png";
+  const caption = `📊 <b>Profit Forecast:</b>\n\n💰 Actual: $600\n💸 Estimate: $1000\n\n🚀 Keep up the momentum!`;
+  ctx.replyWithPhoto(imageUrl, { caption: caption, parse_mode: "HTML" });
+});
+
 
 // @kamal example value - /contributetobts 0x88f443423ee7f81ac74db28489137bfff999ac70 100
 bot.command("contributetobts", async (ctx) => {
@@ -289,6 +343,8 @@ app.post(URI, async (req, res) => {
 
   return res.send();
 });
+
+
 
 app.listen(port, async () => {
   console.log(`Telegram bot listening on port ${port}`);
