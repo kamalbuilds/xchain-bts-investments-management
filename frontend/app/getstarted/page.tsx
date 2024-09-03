@@ -33,13 +33,15 @@ export default function Home() {
   useEffect(() => {
     const fetchBTSData = async () => {
       try {
-        const url = `${BASE_URL}/bts/trending`
+        const url = `${BASE_URL}/bts?page=1&limit=30&sortBy=24hourPriceChange&sortOrder=-1`
         const res = await fetch(url)
         const response = await res.json()
         const { docs } = response
 
         // Send only top 10 BTS token
         const BTSData = docs
+
+        console.log("BTSData:", BTSData)
 
         // for faster testing with only 10 BTS tokens
         // const BTSData = docs.length > 10 ? docs.slice(0, 10) : docs
@@ -54,6 +56,7 @@ export default function Home() {
     fetchBTSData()
   }, [])
 
+  console.log(groupedBTS,"groupedBTS")
   const handleCardSelect = (cardTitle: string) => {
     setSelectedCard(cardTitle)
   }
@@ -67,7 +70,7 @@ export default function Home() {
 
   function categorizeBTS(btsData: BTSDataType[]): CategorizedBTS[] {
     const maxValues = {
-      tvl: Math.max(...btsData.map((bts) => parseFloat(bts.tvl.usd))),
+      tvl: Math.max(...btsData.map((bts) => parseFloat(bts.tvl?.usd))),
       performance: Math.max(...btsData.map((bts) => bts.all_time_performance)),
       volume: Math.max(...btsData.map((bts) => bts["24hourVolume"])),
       priceChange: Math.max(
@@ -77,8 +80,10 @@ export default function Home() {
       supply: Math.max(...btsData.map((bts) => parseFloat(bts.total_supply))),
     }
 
+    console.log("maxValues:", maxValues);
+
     return btsData.map((bts) => {
-      const normalizedTVL = parseFloat(bts.tvl.usd) / maxValues.tvl
+      const normalizedTVL = parseFloat(bts.tvl?.usd) / maxValues?.tvl
       const normalizedPerformance =
         bts.all_time_performance / maxValues.performance
       const normalizedVolume = bts["24hourVolume"] / maxValues.volume
@@ -112,7 +117,7 @@ export default function Home() {
 
   const fetchTotalVolumeBasedOnBTS = (arr, category) => {
     const filtered = arr.filter((item) => item.category === category)
-    const totalVolume = filtered.reduce((sum, item) => sum + item.tvl.usd, 0)
+    const totalVolume = filtered.reduce((sum, item) => sum + item.tvl?.usd, 0)
     const averageVolume =
       filtered.length > 0 ? totalVolume / filtered.length : 0
 

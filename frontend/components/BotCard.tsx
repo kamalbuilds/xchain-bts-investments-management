@@ -98,7 +98,7 @@ export const BotCard: React.FC<BotCardProps> = ({
                               </h4>
                               <p className="text-muted-foreground text-sm">
                                 TVL: $
-                                {parseFloat(bts.tvl.usd)?.toLocaleString()}
+                                {parseFloat(bts.tvl?.usd)?.toLocaleString()}
                               </p>
                             </div>
                             <div className="flex flex-col">

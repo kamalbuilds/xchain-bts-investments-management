@@ -1,9 +1,9 @@
-"use client"
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { MetaMaskSDK } from "@metamask/sdk";
+"use client";
+import React from "react";
+import { MetaMaskSDK, SDKProvider } from "@metamask/sdk";
 import {
   Chain,
+  Network,
   SignAndSendSigner,
   Signer,
   TokenTransfer,
@@ -15,22 +15,34 @@ import {
   encoding,
   isNative,
   toChainId,
-  wormhole
+  wormhole,
 } from "@wormhole-foundation/sdk";
 import evm from "@wormhole-foundation/sdk/evm";
 import solana from "@wormhole-foundation/sdk/solana";
+import algorand from "@wormhole-foundation/sdk/algorand";
 
-import { NETWORK } from "./consts";
+import { useEffect, useState } from "react";
+
 import { MetaMaskSigner } from "./metamask";
 import { PhantomProvider, PhantomSigner } from "./phantom";
+import Image from "next/image";
 
-const msk = new MetaMaskSDK();
+const msk = new MetaMaskSDK(
+  {
+    dappMetadata: {
+        name: "XChain BTS Funds Investment",
+        url: "https://bts.vercel.app",
+    },
+  }
+);
 
 export default function Home() {
-  const [evmProvider, setEvmProvider] = useState<any | null>(null);
-  const [evmSigner, setEvmSigner] = useState<SignAndSendSigner<Chain> | null>(null);
+  const NETWORK = "Testnet";
+
+  const [evmProvider, setEvmProvider] = useState<SDKProvider | null>(null);
+  const [evmSigner, setEvmSigner] = useState<SignAndSendSigner<Network , Chain> | null>(null);
   const [phantomProvider, setPhantomProvider] = useState<PhantomProvider | null>(null);
-  const [solSigner, setSolSigner] = useState<SignAndSendSigner<Chain> | null>(null);
+  const [solSigner, setSolSigner] = useState<SignAndSendSigner<Network , Chain> | null>(null);
   const [srcChain, setSrcChain] = useState<Chain>("Avalanche");
   const [dstChain, setDstChain] = useState<Chain>("Solana");
   const [transfer, setTransfer] = useState<TokenTransfer | null>(null);
@@ -38,7 +50,7 @@ export default function Home() {
   const [srcTxIds, setSrcTxIds] = useState<string[]>([]);
   const [attestations, setAttestations] = useState<WormholeMessageId[]>([]);
   const [dstTxIds, setDstTxIds] = useState<string[]>([]);
-  const [wh, setWormhole] = useState<Wormhole | null>(null);
+  const [wh, setWormhole] = useState<Wormhole<Network> | null>(null);
 
   useEffect(() => {
     if (!wh) wormhole(NETWORK, [evm, solana]).then(setWormhole);
